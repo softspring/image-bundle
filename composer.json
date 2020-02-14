@@ -1,6 +1,6 @@
 {
     "name": "softspring/image-bundle",
-    "description": "A image management bundle",
+    "description": "An image management bundle",
     "type": "symfony-bundle",
     "license": "MIT",
     "require": {
