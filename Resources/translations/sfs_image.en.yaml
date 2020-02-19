@@ -1,0 +1,32 @@
+type_definition_type:
+    definition.label: "Definition"
+    _original.label: "Original"
+
+type_requirements_type:
+    minWidth.label: "Min width"
+    minHeight.label: "Min height"
+    maxWidth.label: "Max width"
+    maxHeight.label: "Max height"
+    allowedFormats.label: "Allowed formats"
+
+
+admin_types:
+    create:
+        page_title: "New image type"
+        title: "New image type"
+        form:
+            key.label: "Type key"
+        actions:
+            create.button: "Create"
+            cancel.button: "Cancel"
+
+    update:
+        page_title: "Update image type"
+        title: "Update image type"
+        form:
+            key.label: "Type key"
+        actions:
+            update.button: "Update"
+            delete.button: "Delete"
+            cancel.button: "Cancel"
+

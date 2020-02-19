@@ -1,0 +1,39 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+        bind:
+            $em: '@sfs_image.entity_manager'
+            $storageClient: '@sfs_image.storage.google_cloud.storage_client'
+            $bucket: '%sfs_image.storage.google_cloud.storage_bucket%'
+
+    sfs_image.storage.google_cloud.storage_client:
+        class: Google\Cloud\Storage\StorageClient
+
+    Softspring\ImageBundle\Form\:
+        resource: '../../../Form/*'
+
+    Softspring\ImageBundle\Manager\:
+        resource: '../../../Manager/*'
+
+    Softspring\ImageBundle\Request\ParamConverter\:
+        resource: '../../../Request/ParamConverter/*'
+        tags: ['request.param_converter']
+
+    Softspring\ImageBundle\Storage\:
+        resource: '../../../Storage/*'
+
+    Softspring\ImageBundle\Twig\Extension\:
+        resource: '../../../Twig/Extension/*'
+        tags: ['twig.extension']
+
+    Softspring\ImageBundle\EntityListener\ImageVersionListener:
+        tags:
+            - { name: 'doctrine.orm.entity_listener', event: 'preUpdate', entity: 'Softspring\ImageBundle\Model\ImageVersion' }
+            - { name: 'doctrine.orm.entity_listener', event: 'prePersist', entity: 'Softspring\ImageBundle\Model\ImageVersion' }
+
+    Softspring\ImageBundle\EntityListener\ImageListener:
+        tags:
+            - { name: 'doctrine.orm.entity_listener', event: 'preUpdate', entity: 'Softspring\ImageBundle\Model\Image' }
+            - { name: 'doctrine.orm.entity_listener', event: 'prePersist', entity: 'Softspring\ImageBundle\Model\Image' }

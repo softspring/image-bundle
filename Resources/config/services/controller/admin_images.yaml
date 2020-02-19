@@ -1,0 +1,68 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+#        bind:
+#            $em: '@sfs_image.entity_manager'
+
+    Softspring\ImageBundle\Form\Admin\:
+        resource: '../../../../Form/Admin/Image*'
+
+    Softspring\ImageBundle\EventListener\Admin\:
+        resource: '../../../../EventListener/Admin/Image*'
+
+    sfs_image.admin.image.controller:
+        class: Softspring\CrudlBundle\Controller\CrudlController
+        public: true
+        calls:
+            - { method: setContainer, arguments: ['@service_container'] }
+        arguments:
+            $manager: '@Softspring\ImageBundle\Manager\ImageManagerInterface'
+            $listFilterForm: '@Softspring\ImageBundle\Form\Admin\ImageListFilterFormInterface'
+            $createForm: '@Softspring\ImageBundle\Form\Admin\ImageCreateFormInterface'
+            $updateForm: '@Softspring\ImageBundle\Form\Admin\ImageUpdateFormInterface'
+            $deleteForm: '@Softspring\ImageBundle\Form\Admin\ImageDeleteFormInterface'
+            $config:
+                entity_attribute: 'image'
+                list:
+                    is_granted: 'ROLE_ADMIN_IMAGE_LIST'
+                    initialize_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_LIST_INITIALIZE
+                    view_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_LIST_VIEW
+                    view: '@@SfsImage/admin/image/list.html.twig'
+                    view_page: '@@SfsImage/admin/image/list-page.html.twig'
+                create:
+                    is_granted: 'ROLE_ADMIN_IMAGE_CREATE'
+                    initialize_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_CREATE_INITIALIZE
+                    form_valid_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_CREATE_FORM_VALID
+                    success_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_CREATE_SUCCESS
+                    form_invalid_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_CREATE_FORM_INVALID
+                    view_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_CREATE_VIEW
+                    success_redirect_to: 'sfs_image_admin_images_list'
+                    view: '@@SfsImage/admin/image/create.html.twig'
+                update:
+                    is_granted: 'ROLE_ADMIN_IMAGE_UPDATE'
+                    param_converter_key: 'id'
+                    initialize_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_UPDATE_INITIALIZE
+                    form_valid_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_UPDATE_FORM_VALID
+                    success_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_UPDATE_SUCCESS
+                    form_invalid_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_UPDATE_FORM_INVALID
+                    view_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_UPDATE_VIEW
+                    success_redirect_to: 'sfs_image_admin_images_list'
+                    view: '@@SfsImage/admin/image/update.html.twig'
+                delete:
+                    is_granted: 'ROLE_ADMIN_IMAGE_DELETE'
+                    param_converter_key: 'id'
+                    initialize_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_DELETE_INITIALIZE
+                    form_valid_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_DELETE_FORM_VALID
+                    success_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_DELETE_SUCCESS
+                    form_invalid_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_DELETE_FORM_INVALID
+                    view_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_DELETE_VIEW
+                    success_redirect_to: 'sfs_image_admin_images_list'
+                    view: '@@SfsImage/admin/image/delete.html.twig'
+                read:
+                    is_granted: 'ROLE_ADMIN_IMAGE_READ'
+                    param_converter_key: 'id'
+                    initialize_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_READ_INITIALIZE
+                    view_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_READ_VIEW
+                    view: '@@SfsImage/admin/image/read.html.twig'

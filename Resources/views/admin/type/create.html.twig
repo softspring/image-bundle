@@ -1,0 +1,19 @@
+{% trans_default_domain 'sfs_image' %}
+{% extends '@SfsImage/admin_layout.html.twig' %}
+{% block title %}{{ 'admin_types.create.page_title'|trans }}{% endblock %}
+
+{% form_theme form '@SfsImage/form_theme.html.twig' %}
+
+{% block content %}
+    <div class="d-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3">{{ 'admin_types.create.title'|trans }}</h1>
+    </div>
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_rest(form) }}
+        <div class="d-flex justify-content-end align-items-center">
+            <a href="{{ url('sfs_image_admin_types_list') }}" class="btn btn-outline-secondary ml-3">{{ 'admin_types.create.actions.cancel.button'|trans }}</a>
+            <input type="submit" value="{{ 'admin_types.create.actions.create.button'|trans }}" class="btn btn-primary ml-3" />
+        </div>
+    {{ form_end(form) }}
+{% endblock content %}

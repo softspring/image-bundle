@@ -26,6 +26,23 @@ class Configuration implements ConfigurationInterface
                         ->booleanNode('admin_controller')->defaultFalse()->end()
                     ->end()
                 ->end()
+
+                ->arrayNode('image')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('class')->defaultValue('App\Entity\Image')->end()
+                        ->scalarNode('find_field_name')->defaultValue('id')->end()
+                        ->booleanNode('admin_controller')->defaultFalse()->end()
+                    ->end()
+                ->end()
+
+                ->arrayNode('version')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('class')->defaultValue('App\Entity\ImageVersion')->end()
+                        ->scalarNode('find_field_name')->defaultValue('id')->end()
+                    ->end()
+                ->end()
             ->end()
         ;
 

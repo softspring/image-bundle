@@ -2,7 +2,10 @@
 
 namespace Softspring\ImageBundle\DependencyInjection;
 
+use Softspring\ImageBundle\Doctrine\Type\ImageVersionsType;
+use Softspring\ImageBundle\Model\ImageInterface;
 use Softspring\ImageBundle\Model\ImageTypeInterface;
+use Softspring\ImageBundle\Model\ImageVersionInterface;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -28,12 +31,20 @@ class SfsImageExtension extends Extension implements PrependExtensionInterface
         // configure model classes
         $container->setParameter('sfs_image.type.class', $config['type']['class']);
         $container->setParameter('sfs_image.type.find_field_name', $config['type']['find_field_name'] ?? null);
+        $container->setParameter('sfs_image.image.class', $config['image']['class']);
+        $container->setParameter('sfs_image.image.find_field_name', $config['image']['find_field_name'] ?? null);
+        $container->setParameter('sfs_image.version.class', $config['version']['class']);
+        $container->setParameter('sfs_image.version.find_field_name', $config['version']['find_field_name'] ?? null);
 
         // load services
         $loader->load('services.yaml');
 
         if ($config['type']['admin_controller']) {
             $loader->load('controller/admin_types.yaml');
+        }
+
+        if ($config['image']['admin_controller']) {
+            $loader->load('controller/admin_images.yaml');
         }
     }
 
@@ -43,6 +54,8 @@ class SfsImageExtension extends Extension implements PrependExtensionInterface
 
         // add a default config to force load target_entities, will be overwritten by ResolveDoctrineTargetEntityPass
         $doctrineConfig['orm']['resolve_target_entities'][ImageTypeInterface::class] = 'App\Entity\ImageType';
+        $doctrineConfig['orm']['resolve_target_entities'][ImageInterface::class] = 'App\Entity\Image';
+        $doctrineConfig['orm']['resolve_target_entities'][ImageVersionInterface::class] = 'App\Entity\ImageVersion';
 
         // disable auto-mapping for this bundle to prevent mapping errors
         $doctrineConfig['orm']['mappings']['SfsImageBundle'] = [

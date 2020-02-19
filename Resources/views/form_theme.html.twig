@@ -1,0 +1,50 @@
+
+{% block type_requirements_row %}
+    {{ form_label(form) }}
+    <div class="row pb-2">
+        {{ form_widget(form) }}
+    </div>
+{% endblock %}
+
+{% block type_requirements_widget %}
+    <div class="col-sm-6 col-md mb-2 mb-0">{{ form_row(form.minWidth) }}</div>
+    <div class="col-sm-6 col-md mb-2 mb-0">{{ form_row(form.minHeight) }}</div>
+    <div class="col-sm-6 col-md mb-2 mb-0">{{ form_row(form.maxWidth) }}</div>
+    <div class="col-sm-6 col-md mb-2 mb-0">{{ form_row(form.maxHeight) }}</div>
+    <div class="col-sm-6 col-md mb-2 mb-0">{{ form_row(form.allowedFormats) }}</div>
+{% endblock %}
+
+
+
+
+{% block type_definition_version_collection_row %}
+    <div class="row">
+        <div class="col">
+            {{ form_label(form) }}
+        </div>
+    </div>
+
+    {{ form_widget(form) }}
+{% endblock %}
+
+{% block type_definition_version_collection_widget %}
+    <div class="row">
+        {% set attr = attr | merge({
+            'class':' col collection-widget',
+            'data-prototype': form_row(form.vars.prototype)
+        }) %}
+        <div {{ block('widget_container_attributes') }}>
+            {%- if form.parent is empty -%}
+                {{ form_errors(form) }}
+            {%- endif -%}
+            {{- block('form_rows') -}}
+            {{- form_rest(form) -}}
+        </div>
+    </div>
+
+    <div class="row mb-2">
+    <div class="col">
+    <a class="btn btn-light add-new-row">add</a>
+    </div>
+    </div>
+{% endblock %}

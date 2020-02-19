@@ -1,0 +1,19 @@
+sfs_image_admin_images_list:
+    controller: sfs_image.admin.image.controller::list
+    path: /
+
+sfs_image_admin_images_create:
+    controller: sfs_image.admin.image.controller::create
+    path: /{type}/create
+
+sfs_image_admin_images_update:
+    controller: sfs_image.admin.image.controller::update
+    path: /{image}/update
+
+sfs_image_admin_images_delete:
+    controller: sfs_image.admin.image.controller::delete
+    path: /{image}/delete
+
+sfs_image_admin_images_read:
+    controller: sfs_image.admin.image.controller::read
+    path: /{image}

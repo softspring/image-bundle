@@ -1,0 +1,19 @@
+{% trans_default_domain 'sfs_image' %}
+
+{% for type in entities %}
+    <tr>
+        <td>{{ type.key }}</td>
+{#        <td>{{ type.name }}</td>#}
+{#        <td>{{ type.enabled ? 'yes' : 'no' }}</td>#}
+
+        <td>
+{#            {% if is_granted('ROLE_ADMIN_IMAGE_TYPE_READ', type) %}#}
+{#                <a href="{{ url('sfs_image_admin_types_read', {'type':type.key}) }}" class="ml-2 text-nowrap">{{ 'admin_types.list.actions.details.button'|trans }} <span class="mdi mdi-18px mdi-eye-outline align-middle"></span></a>#}
+{#            {% endif %}#}
+
+            {% if is_granted('ROLE_ADMIN_IMAGE_TYPE_UPDATE', type) %}
+                <a href="{{ url('sfs_image_admin_types_update', {'type':type.key}) }}" class="ml-2 text-nowrap">{{ 'admin_types.list.actions.update.button'|trans }} <span class="mdi mdi-18px mdi-square-edit-outline align-middle"></span></a>
+            {% endif %}
+        </td>
+    </tr>
+{% endfor %}

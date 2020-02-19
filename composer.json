@@ -6,6 +6,10 @@
     "require": {
         "php": "^7.2"
     },
+    "suggest": {
+        "softspring/crudl-bundle": "Required if you want to enable admin controllers",
+        "google/cloud-storage": "Required to integrate image storage in GCS"
+    },
     "autoload": {
         "psr-4": {
             "Softspring\\ImageBundle\\": ""

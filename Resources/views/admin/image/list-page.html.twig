@@ -1,0 +1,23 @@
+{% trans_default_domain 'sfs_image' %}
+
+{% for image in entities %}
+    <tr>
+        <td>
+            {{ image|sfs_image_render_picture('original') }}
+            {{ image.id }}
+        </td>
+        <td>{{ image.type.key }}</td>
+{#        <td>{{ image.name }}</td>#}
+{#        <td>{{ image.enabled ? 'yes' : 'no' }}</td>#}
+
+        <td>
+{#            {% if is_granted('ROLE_ADMIN_IMAGE_READ', image) %}#}
+{#                <a href="{{ url('sfs_image_admin_images_read', {'image':image.key}) }}" class="ml-2 text-nowrap">{{ 'admin_images.list.actions.details.button'|trans }} <span class="mdi mdi-18px mdi-eye-outline align-middle"></span></a>#}
+{#            {% endif %}#}
+
+            {% if is_granted('ROLE_ADMIN_IMAGE_UPDATE', image) %}
+                <a href="{{ url('sfs_image_admin_images_update', {'image':image.id}) }}" class="ml-2 text-nowrap">{{ 'admin_images.list.actions.update.button'|trans }} <span class="mdi mdi-18px mdi-square-edit-outline align-middle"></span></a>
+            {% endif %}
+        </td>
+    </tr>
+{% endfor %}
