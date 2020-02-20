@@ -65,7 +65,7 @@ abstract class AbstractImageForm extends AbstractType
         $builder->add('_original', ImageVersionType::class, [
             'property_path' => "versions[_original]",
             'data' => new $class('_original', $image),
-            // 'upload_requirements' => $type['upload_requirements'],
+             'upload_requirements' => $type['upload_requirements'],
         ]);
 
         foreach ($type['versions'] as $key => $config) {
@@ -75,7 +75,7 @@ abstract class AbstractImageForm extends AbstractType
             $builder->add($key, ImageVersionType::class, [
                 'property_path' => "versions[$key]",
                 'data' => new $class($key, $image),
-                // 'upload_requirements' => $type['upload_requirements'],
+                'upload_requirements' => $type['upload_requirements'],
             ]);
         }
     }

@@ -64,15 +64,19 @@ class Configuration implements ConfigurationInterface
 
         $node
             ->children()
-                ->integerNode('min_width')->defaultValue(0)->end()
-                ->integerNode('min_height')->defaultValue(0)->end()
-                ->integerNode('max_width')->end()
-                ->integerNode('max_height')->end()
-                ->arrayNode('allowed_formats')
-                    ->enumPrototype()
-                        ->values(['jpeg', 'png'])
-                    ->end()
-                ->end()
+                ->integerNode('minWidth')->end()
+                ->integerNode('minHeight')->end()
+                ->integerNode('maxWidth')->end()
+                ->integerNode('maxHeight')->end()
+                ->integerNode('maxRatio')->end()
+                ->integerNode('minRatio')->end()
+                ->integerNode('minPixels')->end()
+                ->integerNode('maxPixels')->end()
+                ->booleanNode('allowSquare')->defaultTrue()->end()
+                ->booleanNode('allowLandscape')->defaultTrue()->end()
+                ->booleanNode('allowPortrait')->defaultTrue()->end()
+                ->booleanNode('detectCorrupted')->defaultFalse()->end()
+                ->arrayNode('mimeTypes')->scalarPrototype()->end()->end()
             ->end()
         ;
 

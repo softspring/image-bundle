@@ -32,13 +32,23 @@ class RenderImageExtension extends AbstractExtension
         ];
     }
 
-    public function renderImage(ImageInterface $image, string $version, array $attr = []): string
+    public function renderImage(ImageInterface $image, $version, array $attr = []): string
     {
-        if (! $imageVersion = $image->getVersion($version)) {
-            return '';
-        }
+        if (is_array($version)) {
+            foreach ($version as $singleVersion) {
+                if ($html = $this->renderImage($image, $singleVersion, $attr)) {
+                    return $html;
+                }
+            }
 
-        return $this->renderImgTag($imageVersion, $attr);
+            return '';
+        } else {
+            if (!$imageVersion = $image->getVersion($version)) {
+                return '';
+            }
+
+            return $this->renderImgTag($imageVersion, $attr);
+        }
     }
 
     public function renderPicture(ImageInterface $image, string $picture = '_default', array $attr = []): string
