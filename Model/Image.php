@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\Collection;
 abstract class Image implements ImageInterface
 {
     /**
-     * @var ImageTypeInterface|null
+     * @var string|null
      */
     protected $type;
 
@@ -28,7 +28,7 @@ abstract class Image implements ImageInterface
     /**
      * @inheritDoc
      */
-    public function getType(): ?ImageTypeInterface
+    public function getType(): ?string
     {
         return $this->type;
     }
@@ -36,7 +36,7 @@ abstract class Image implements ImageInterface
     /**
      * @inheritDoc
      */
-    public function setType(?ImageTypeInterface $type): void
+    public function setType(?string $type): void
     {
         $this->type = $type;
     }

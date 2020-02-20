@@ -50,6 +50,6 @@ trait ImageHasVersionsTrait
     {
         return $this->versions->filter(function(ImageVersionInterface $imageVersion) use ($version) {
             return $imageVersion->getVersion() == $version;
-        })->first();
+        })->first() ?: null;
     }
 }

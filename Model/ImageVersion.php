@@ -2,7 +2,7 @@
 
 namespace Softspring\ImageBundle\Model;
 
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\File\File;
 
 abstract class ImageVersion implements ImageVersionInterface
 {
@@ -17,7 +17,7 @@ abstract class ImageVersion implements ImageVersionInterface
     protected $version;
 
     /**
-     * @var UploadedFile|null
+     * @var File|null
      */
     protected $upload;
 
@@ -51,10 +51,12 @@ abstract class ImageVersion implements ImageVersionInterface
      */
     protected $uploadedAt;
 
-    public function __construct(string $version, ImageInterface $image)
+    public function __construct(string $version = null, ImageInterface $image = null)
     {
         $this->setVersion($version);
-        $image->addVersion($this);
+        if ($image instanceof ImageInterface) {
+            $image->addVersion($this);
+        }
     }
 
     /**
@@ -92,7 +94,7 @@ abstract class ImageVersion implements ImageVersionInterface
     /**
      * @inheritDoc
      */
-    public function getUpload(): ?UploadedFile
+    public function getUpload(): ?File
     {
         return $this->upload;
     }
@@ -100,7 +102,7 @@ abstract class ImageVersion implements ImageVersionInterface
     /**
      * @inheritDoc
      */
-    public function setUpload(?UploadedFile $upload): void
+    public function setUpload(?File $upload): void
     {
         $this->upload = $upload;
         $this->uploadedAt = gmdate('U');

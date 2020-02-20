@@ -4,7 +4,6 @@ namespace Softspring\ImageBundle\EventListener\Admin;
 
 use Softspring\CoreBundle\Event\ViewEvent;
 use Softspring\CrudlBundle\Event\GetResponseEntityEvent;
-use Softspring\ImageBundle\Manager\ImageTypeManagerInterface;
 use Softspring\ImageBundle\Model\ImageInterface;
 use Softspring\ImageBundle\SfsImageEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -12,18 +11,18 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 class ImageListener implements EventSubscriberInterface
 {
     /**
-     * @var ImageTypeManagerInterface
+     * @var array
      */
-    protected $typeManager;
+    protected $imageTypes;
 
     /**
      * ImageListener constructor.
      *
-     * @param ImageTypeManagerInterface $typeManager
+     * @param array $imageTypes
      */
-    public function __construct(ImageTypeManagerInterface $typeManager)
+    public function __construct(array $imageTypes)
     {
-        $this->typeManager = $typeManager;
+        $this->imageTypes = $imageTypes;
     }
 
     /**
@@ -42,7 +41,7 @@ class ImageListener implements EventSubscriberInterface
      */
     public function onListViewAddTypes(ViewEvent $event): void
     {
-        $event->getData()['imageTypes'] = $this->typeManager->getRepository()->findAll();
+        $event->getData()['imageTypes'] = $this->imageTypes;
     }
 
     /**
@@ -51,10 +50,6 @@ class ImageListener implements EventSubscriberInterface
     public function onCreateInitializeAddType(GetResponseEntityEvent $event): void
     {
         $type = $event->getRequest()->attributes->get('type');
-
-        if (is_string($type)) {
-            $type = $this->typeManager->getRepository()->findOneByKey($type);
-        }
 
         /** @var ImageInterface $image */
         $image = $event->getEntity();

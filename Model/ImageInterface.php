@@ -7,14 +7,14 @@ use Doctrine\Common\Collections\Collection;
 interface ImageInterface
 {
     /**
-     * @return ImageTypeInterface|null
+     * @return string|null
      */
-    public function getType(): ?ImageTypeInterface;
+    public function getType(): ?string;
 
     /**
-     * @param ImageTypeInterface|null $type
+     * @param string|null $type
      */
-    public function setType(?ImageTypeInterface $type): void;
+    public function setType(?string $type): void;
 
     /**
      * @return Collection|ImageVersionInterface[]

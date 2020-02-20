@@ -4,7 +4,6 @@ namespace Softspring\ImageBundle\DependencyInjection\Compiler;
 
 use Softspring\CoreBundle\DependencyInjection\Compiler\AbstractResolveDoctrineTargetEntityPass;
 use Softspring\ImageBundle\Model\ImageInterface;
-use Softspring\ImageBundle\Model\ImageTypeInterface;
 use Softspring\ImageBundle\Model\ImageVersionInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -23,7 +22,6 @@ class ResolveDoctrineTargetEntityPass extends AbstractResolveDoctrineTargetEntit
      */
     public function process(ContainerBuilder $container)
     {
-        $this->setTargetEntityFromParameter('sfs_image.type.class', ImageTypeInterface::class, $container, true);
         $this->setTargetEntityFromParameter('sfs_image.image.class', ImageInterface::class, $container, true);
         $this->setTargetEntityFromParameter('sfs_image.version.class', ImageVersionInterface::class, $container, true);
     }

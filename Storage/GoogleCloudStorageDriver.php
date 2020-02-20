@@ -36,7 +36,7 @@ class GoogleCloudStorageDriver implements StorageInterface
     {
         $bucket = $this->storageClient->bucket($this->bucket);
         $stgObject = $bucket->upload(fopen($version->getUpload()->getRealPath(), 'r'), [
-            'name' => sha1(time().$version->getUpload()->getClientOriginalName()).'.'.$version->getUpload()->guessClientExtension(),
+            'name' => sha1(time().$version->getUpload()->getRealPath()).'.'.$version->getUpload()->guessExtension(),
         ]);
 
         return 'gs://'.$this->bucket.'/'.$stgObject->name();

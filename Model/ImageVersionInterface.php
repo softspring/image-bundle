@@ -2,7 +2,7 @@
 
 namespace Softspring\ImageBundle\Model;
 
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\File\File;
 
 interface ImageVersionInterface
 {
@@ -27,14 +27,14 @@ interface ImageVersionInterface
     public function setVersion(?string $version): void;
 
     /**
-     * @return UploadedFile|null
+     * @return File|null
      */
-    public function getUpload(): ?UploadedFile;
+    public function getUpload(): ?File;
 
     /**
-     * @param UploadedFile|null $upload
+     * @param File|null $upload
      */
-    public function setUpload(?UploadedFile $upload): void;
+    public function setUpload(?File $upload): void;
 
     /**
      * @return string|null

@@ -3,7 +3,8 @@ services:
         autowire: true
         autoconfigure: true
         public: false
-#        bind:
+        bind:
+            $imageTypes: '%sfs_image.types%'
 #            $em: '@sfs_image.entity_manager'
 
     Softspring\ImageBundle\Form\Admin\:
@@ -61,7 +62,7 @@ services:
                     success_redirect_to: 'sfs_image_admin_images_list'
                     view: '@@SfsImage/admin/image/delete.html.twig'
                 read:
-                    is_granted: 'ROLE_ADMIN_IMAGE_READ'
+                    is_granted: 'ROLE_ADMIN_IMAGE_DETAILS'
                     param_converter_key: 'id'
                     initialize_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_READ_INITIALIZE
                     view_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_READ_VIEW

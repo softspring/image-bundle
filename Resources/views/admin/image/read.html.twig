@@ -1,8 +1,14 @@
-{% set image = entity %}
 {% trans_default_domain 'sfs_image' %}
 {% extends '@SfsImage/admin_layout.html.twig' %}
 {% block title %}{{ 'admin_images.read.page_title'|trans }}{% endblock %}
 
 {% block content %}
-    <h1 class="h3 mb-4">{{ image.name }}</h1>
+    <h1 class="h3 mb-4">{{ image.id }}</h1>
+
+    <h2>Original</h2>
+    {{ image|sfs_image_render_image('_original', {'class':'img-thumbnail', 'alt': 'Original image', 'title': 'Original image'}) }}
+
+    <h2>Picture</h2>
+    {{ image|sfs_image_render_picture }}
+    <pre><code>{{ image|sfs_image_render_picture|e('html') }}</code></pre>
 {% endblock content %}

@@ -4,7 +4,9 @@
     "type": "symfony-bundle",
     "license": "MIT",
     "require": {
-        "php": "^7.2"
+        "php": "^7.2",
+        "ext-gd": "*",
+        "imagine/imagine": "^1.2"
     },
     "suggest": {
         "softspring/crudl-bundle": "Required if you want to enable admin controllers",

@@ -5,7 +5,6 @@ namespace Softspring\ImageBundle\Form\Admin;
 use Softspring\ImageBundle\Form\ImageVersionType;
 use Softspring\ImageBundle\Manager\ImageVersionManagerInterface;
 use Softspring\ImageBundle\Model\ImageInterface;
-use Softspring\ImageBundle\Model\ImageTypeInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,13 +18,20 @@ abstract class AbstractImageForm extends AbstractType
     protected $manager;
 
     /**
-     * ImageVersionType constructor.
+     * @var array
+     */
+    protected $imageTypes;
+
+    /**
+     * AbstractImageForm constructor.
      *
      * @param ImageVersionManagerInterface $manager
+     * @param array                        $imageTypes
      */
-    public function __construct(ImageVersionManagerInterface $manager)
+    public function __construct(ImageVersionManagerInterface $manager, array $imageTypes)
     {
         $this->manager = $manager;
+        $this->imageTypes = $imageTypes;
     }
 
     /**
@@ -41,7 +47,7 @@ abstract class AbstractImageForm extends AbstractType
         ]);
 
         $resolver->setRequired('image_type');
-        $resolver->setAllowedTypes('image_type', ImageTypeInterface::class);
+        $resolver->setAllowedTypes('image_type', 'string');
 
         $resolver->setRequired('image');
         $resolver->setAllowedTypes('image', ImageInterface::class);
@@ -52,14 +58,24 @@ abstract class AbstractImageForm extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $type = $options['image_type'];
+        $type = $this->imageTypes[$options['image_type']];
         $image = $options['image'];
         $class = $this->manager->getEntityClass();
 
-        foreach ($type->getDefinition() as $key => $definition) {
+        $builder->add('_original', ImageVersionType::class, [
+            'property_path' => "versions[_original]",
+            'data' => new $class('_original', $image),
+            // 'upload_requirements' => $type['upload_requirements'],
+        ]);
+
+        foreach ($type['versions'] as $key => $config) {
+            if (!isset($config['upload_requirements'])) {
+                continue;
+            }
             $builder->add($key, ImageVersionType::class, [
                 'property_path' => "versions[$key]",
                 'data' => new $class($key, $image),
+                // 'upload_requirements' => $type['upload_requirements'],
             ]);
         }
     }
