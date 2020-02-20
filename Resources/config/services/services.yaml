@@ -8,12 +8,18 @@ services:
             $storageClient: '@sfs_image.storage.google_cloud.storage_client'
             $bucket: '%sfs_image.storage.google_cloud.storage_bucket%'
             $imageTypes: '%sfs_image.types%'
+    _instanceof:
+        Softspring\ImageBundle\Image\NameGeneratorInterface:
+            tags: ['sfs_image.name_generator']
 
     sfs_image.storage.google_cloud.storage_client:
         class: Google\Cloud\Storage\StorageClient
 
     Softspring\ImageBundle\Form\:
         resource: '../../../Form/*'
+
+    Softspring\ImageBundle\Image\:
+        resource: '../../../Image/*'
 
     Softspring\ImageBundle\Manager\:
         resource: '../../../Manager/*'

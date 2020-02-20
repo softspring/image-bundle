@@ -90,9 +90,4 @@ interface ImageVersionInterface
      * @return \DateTime|null
      */
     public function getUploadedAt(): ?\DateTime;
-
-    /**
-     * @return array|null
-     */
-    public function getTypeDefinition(): ?array;
 }

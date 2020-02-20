@@ -195,22 +195,4 @@ abstract class ImageVersion implements ImageVersionInterface
     {
         return $this->uploadedAt ? \DateTime::createFromFormat("U", $this->uploadedAt) : null;
     }
-
-    /**
-     * @inheritDoc
-     */
-    public function getTypeDefinition(): ?array
-    {
-        if (!$image = $this->getImage()) {
-            return null;
-        }
-
-        if (!$type = $image->getType()) {
-            return null;
-        }
-
-        $definition = $type->getDefinition();
-
-        return $definition[$this->version] ?? null;
-    }
 }

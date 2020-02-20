@@ -4,25 +4,24 @@ namespace Softspring\ImageBundle\EntityListener;
 
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
+use Softspring\ImageBundle\Manager\ImageVersionManagerInterface;
 use Softspring\ImageBundle\Model\ImageVersionInterface;
-use Softspring\ImageBundle\Storage\StorageInterface;
-use Symfony\Component\HttpFoundation\File\File;
 
 class ImageVersionListener
 {
     /**
-     * @var StorageInterface
+     * @var ImageVersionManagerInterface
      */
-    protected $storage;
+    protected $manager;
 
     /**
      * ImageVersionListener constructor.
      *
-     * @param StorageInterface $storage
+     * @param ImageVersionManagerInterface $manager
      */
-    public function __construct(StorageInterface $storage)
+    public function __construct(ImageVersionManagerInterface $manager)
     {
-        $this->storage = $storage;
+        $this->manager = $manager;
     }
 
     /**
@@ -31,7 +30,7 @@ class ImageVersionListener
      */
     public function preUpdate(ImageVersionInterface $imageVersion, PreUpdateEventArgs $eventArgs)
     {
-        $this->storeUpload($imageVersion);
+        $this->manager->uploadFile($imageVersion);
     }
 
     /**
@@ -40,22 +39,6 @@ class ImageVersionListener
      */
     public function prePersist(ImageVersionInterface $imageVersion, LifecycleEventArgs $eventArgs)
     {
-        $this->storeUpload($imageVersion);
-    }
-
-    protected function storeUpload(ImageVersionInterface $imageVersion): void
-    {
-        $upload = $imageVersion->getUpload();
-
-        if (!$upload instanceof File) {
-            return;
-        }
-
-        $imageVersion->setFileMimeType($upload->getMimeType());
-        $imageVersion->setFileSize($upload->getSize());
-        $imageVersion->setUrl($this->storage->store($imageVersion));
-        list($width, $height) = getimagesize($upload->getRealPath());
-        $imageVersion->setWidth($width);
-        $imageVersion->setHeight($height);
+        $this->manager->uploadFile($imageVersion);
     }
 }

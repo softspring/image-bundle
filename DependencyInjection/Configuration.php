@@ -2,6 +2,7 @@
 
 namespace Softspring\ImageBundle\DependencyInjection;
 
+use Softspring\ImageBundle\Image\DefaultNameGenerator;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\NodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
@@ -43,6 +44,7 @@ class Configuration implements ConfigurationInterface
                         ->children()
                             ->scalarNode('name')->end()
                             ->scalarNode('description')->end()
+                            ->scalarNode('generator')->defaultValue(DefaultNameGenerator::class)->end()
                             ->append($this->getUploadRequirementsNode())
                             ->append($this->getVersionsNode())
                             ->append($this->getPicturesNode())

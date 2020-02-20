@@ -3,9 +3,9 @@
 namespace Softspring\ImageBundle\Storage;
 
 use Google\Cloud\Storage\StorageClient;
-use Softspring\ImageBundle\Model\ImageVersionInterface;
+use Symfony\Component\HttpFoundation\File\File;
 
-class GoogleCloudStorageDriver implements StorageInterface
+class GoogleCloudStorageDriver implements StorageDriverInterface
 {
     /**
      * @var StorageClient
@@ -32,11 +32,11 @@ class GoogleCloudStorageDriver implements StorageInterface
     /**
      * @inheritDoc
      */
-    public function store(ImageVersionInterface $version): string
+    public function store(File $file, string $destName): string
     {
         $bucket = $this->storageClient->bucket($this->bucket);
-        $stgObject = $bucket->upload(fopen($version->getUpload()->getRealPath(), 'r'), [
-            'name' => sha1(time().$version->getUpload()->getRealPath()).'.'.$version->getUpload()->guessExtension(),
+        $stgObject = $bucket->upload(fopen($file->getRealPath(), 'r'), [
+            'name' => $destName,
         ]);
 
         return 'gs://'.$this->bucket.'/'.$stgObject->name();

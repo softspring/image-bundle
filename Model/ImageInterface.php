@@ -7,6 +7,11 @@ use Doctrine\Common\Collections\Collection;
 interface ImageInterface
 {
     /**
+     * @return mixed
+     */
+    public function getId();
+
+    /**
      * @return string|null
      */
     public function getType(): ?string;
