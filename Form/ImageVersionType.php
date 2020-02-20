@@ -18,20 +18,14 @@ class ImageVersionType extends AbstractType
             'upload_requirements' => null,
         ]);
 
-        $resolver->setAllowedTypes('upload_requirements', ['array', 'null']);
+        $resolver->setAllowedTypes('upload_requirements', 'array');
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $constraints = [];
-
-        if (!empty($options['upload_requirements'])) {
-            $constraints[] = new Image($options['upload_requirements']);
-        }
-
         $builder->add('upload', FileType::class, [
             'required' => false,
-            'constraints' => $constraints,
+            'constraints' => new Image($options['upload_requirements']),
         ]);
     }
 }
