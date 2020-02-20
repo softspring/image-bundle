@@ -45,7 +45,7 @@ class Configuration implements ConfigurationInterface
                             ->scalarNode('description')->end()
                             ->append($this->getUploadRequirementsNode())
                             ->append($this->getVersionsNode())
-                            ->append($this->getPictureNode())
+                            ->append($this->getPicturesNode())
                         ->end()
                     ->end()
                 ->end()
@@ -99,27 +99,38 @@ class Configuration implements ConfigurationInterface
         return $node;
     }
 
-    public function getPictureNode(): NodeDefinition
+    public function getPicturesNode(): NodeDefinition
     {
-        $treeBuilder = new TreeBuilder('picture');
+        $treeBuilder = new TreeBuilder('pictures');
 
         /** @var ArrayNodeDefinition $connectionNode */
-        $node = method_exists(TreeBuilder::class, 'getRootNode') ? $treeBuilder->getRootNode() : $treeBuilder->root('picture');
+        $node = method_exists(TreeBuilder::class, 'getRootNode') ? $treeBuilder->getRootNode() : $treeBuilder->root('pictures');
 
         $node
-            ->children()
-                ->arrayNode('img')
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->scalarNode('src_version')->defaultValue('_original')->end()
-                    ->end()
-                ->end()
-                ->arrayNode('sources')
-                    ->arrayPrototype()
+            ->useAttributeAsKey('key')
+            ->arrayPrototype()
+                ->children()
+                    ->arrayNode('img')
+                        ->addDefaultsIfNotSet()
                         ->children()
-                            ->scalarNode('src_version')->isRequired()->end()
-                            ->scalarNode('media')->end()
-                            ->scalarNode('sizes')->end()
+                            ->scalarNode('src_version')->defaultValue('_original')->end()
+                        ->end()
+                    ->end()
+                    ->arrayNode('sources')
+                        ->arrayPrototype()
+                            ->children()
+                                ->arrayNode('srcset')
+                                    ->arrayPrototype()
+                                        ->children()
+                                            ->scalarNode('version')->isRequired()->end()
+                                            ->scalarNode('suffix')->defaultValue('')->end()
+                                        ->end()
+                                    ->end()
+                                ->end()
+                                ->arrayNode('attrs')
+                                    ->scalarPrototype()->end()
+                                ->end()
+                            ->end()
                         ->end()
                     ->end()
                 ->end()

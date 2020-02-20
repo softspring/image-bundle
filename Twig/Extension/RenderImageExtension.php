@@ -41,29 +41,24 @@ class RenderImageExtension extends AbstractExtension
         return $this->renderImgTag($imageVersion, $attr);
     }
 
-    public function renderPicture(ImageInterface $image): string
+    public function renderPicture(ImageInterface $image, string $picture = '_default', array $attr = []): string
     {
         $config = $this->imageTypes[$image->getType()];
 
-        if (!isset($config['picture'])) {
+        if (!isset($config['pictures'][$picture])) {
             throw new \Exception('picture config is not set for '.$image->getType());
         }
 
         $html = '<picture>';
-        foreach ($config['picture']['sources'] ?? [] as $source) {
-            $sourceAttrs = [
-                'srcset' => $this->getFinalUrl($image->getVersion($source['src_version'])),
-            ];
-            if (!empty($source['media'])) {
-                $sourceAttrs['media'] = $source['media'];
-            }
-            if (!empty($source['sizes'])) {
-                $sourceAttrs['sizes'] = $source['sizes'];
-            }
+        foreach ($config['pictures'][$picture]['sources'] ?? [] as $source) {
+            $sourceAttrs = $source['attrs'] ?? [];
+            $sourceAttrs['srcset'] = implode(', ', array_map(function ($srcset) use ($image) {
+                return $this->getFinalUrl($image->getVersion($srcset['version'])) . ($srcset['suffix'] ? " {$srcset['suffix']}" : '');
+            }, $source['srcset']));
             $html .= '<source '. $this->htmlAttributes($sourceAttrs) . ' />';
         }
 
-        $html .= $this->renderImgTag($image->getVersion($config['picture']['img']['src_version']));
+        $html .= $this->renderImgTag($image->getVersion($config['pictures'][$picture]['img']['src_version']), $attr);
         $html .= '</picture>';
 
         return $html;
