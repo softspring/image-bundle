@@ -29,7 +29,27 @@ class RenderImageExtension extends AbstractExtension
         return [
             new TwigFilter('sfs_image_render_image', [$this, 'renderImage'], ['is_safe' => ['html']]),
             new TwigFilter('sfs_image_render_picture', [$this, 'renderPicture'], ['is_safe' => ['html']]),
+            new TwigFilter('sfs_image_url', [$this, 'imageUrl']),
         ];
+    }
+
+    public function imageUrl(ImageInterface $image, $version, array $attr = []): string
+    {
+        if (is_array($version)) {
+            foreach ($version as $singleVersion) {
+                if ($url = $this->getFinalUrl($singleVersion)) {
+                    return $url;
+                }
+            }
+
+            return '';
+        } else {
+            if (!$imageVersion = $image->getVersion($version)) {
+                return '';
+            }
+
+            return $this->getFinalUrl($imageVersion);
+        }
     }
 
     public function renderImage(ImageInterface $image, $version, array $attr = []): string
