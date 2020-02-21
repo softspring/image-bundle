@@ -6,10 +6,11 @@
 
     <mapped-superclass name="Softspring\ImageBundle\Model\Image" table="image">
         <field name="type" column="type_key" type="string" length="50" nullable="false"/>
-
-<!--        <one-to-many field="versions" target-entity="Softspring\ImageBundle\Model\ImageVersionInterface" />-->
-
-<!--        <field name="versions" column="versions" type="image_versions" nullable="true" />-->
+        <field name="uploadedAt" column="uploadedAt" type="integer" nullable="true">
+            <options>
+                <option name="unsigned">true</option>
+            </options>
+        </field>
     </mapped-superclass>
 
 </doctrine-mapping>

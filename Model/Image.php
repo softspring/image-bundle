@@ -18,6 +18,11 @@ abstract class Image implements ImageInterface
     protected $versions;
 
     /**
+     * @var int|null
+     */
+    protected $uploadedAt;
+
+    /**
      * Image constructor.
      */
     public function __construct()
@@ -39,5 +44,21 @@ abstract class Image implements ImageInterface
     public function setType(?string $type): void
     {
         $this->type = $type;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getUploadedAt(): ?\DateTime
+    {
+        return $this->uploadedAt ? \DateTime::createFromFormat("U", $this->uploadedAt) : null;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function markUploadedAtNow(): void
+    {
+        $this->uploadedAt = gmdate('U');
     }
 }

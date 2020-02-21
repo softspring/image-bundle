@@ -33,10 +33,8 @@ services:
 
     Softspring\ImageBundle\EntityListener\ImageVersionListener:
         tags:
-            - { name: 'doctrine.orm.entity_listener', event: 'preUpdate', entity: 'Softspring\ImageBundle\Model\ImageVersion' }
-            - { name: 'doctrine.orm.entity_listener', event: 'prePersist', entity: 'Softspring\ImageBundle\Model\ImageVersion' }
+            - { name: 'doctrine.orm.entity_listener', event: 'preRemove', entity: 'Softspring\ImageBundle\Model\ImageVersion' }
 
     Softspring\ImageBundle\EntityListener\ImageListener:
         tags:
-            - { name: 'doctrine.orm.entity_listener', event: 'preUpdate', entity: 'Softspring\ImageBundle\Model\Image' }
-            - { name: 'doctrine.orm.entity_listener', event: 'prePersist', entity: 'Softspring\ImageBundle\Model\Image' }
+            - { name: 'doctrine.orm.entity_listener', event: 'preFlush', entity: 'Softspring\ImageBundle\Model\Image',  priority: 10 }

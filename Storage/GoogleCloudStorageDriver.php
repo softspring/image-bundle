@@ -41,4 +41,23 @@ class GoogleCloudStorageDriver implements StorageDriverInterface
 
         return 'gs://'.$this->bucket.'/'.$stgObject->name();
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function remove(string $fileName): void
+    {
+        if (substr($fileName, 0, 5) !== 'gs://') {
+            return;
+        }
+
+        [$bucket, $fileName] = explode('/', substr($fileName, 5), 2);
+
+        $bucket = $this->storageClient->bucket($bucket);
+        $object = $bucket->object($fileName);
+
+        if ($object->exists()) {
+            $object->delete();
+        }
+    }
 }

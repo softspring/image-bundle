@@ -42,4 +42,14 @@ interface ImageInterface
      * @return ImageVersionInterface|null
      */
     public function getVersion(string $version): ?ImageVersionInterface;
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getUploadedAt(): ?\DateTime;
+
+    /**
+     *
+     */
+    public function markUploadedAtNow(): void;
 }

@@ -30,6 +30,7 @@ trait ImageHasVersionsTrait
         if (empty($this->versions[$version->getVersion()])) {
             $this->versions[$version->getVersion()] = $version;
             $version->setImage($this);
+            $this->markUploadedAtNow();
         }
     }
 
@@ -40,6 +41,7 @@ trait ImageHasVersionsTrait
     {
         if (!empty($this->versions[$version->getVersion()])) {
             unset($this->versions[$version->getVersion()]);
+            $this->markUploadedAtNow();
         }
     }
 

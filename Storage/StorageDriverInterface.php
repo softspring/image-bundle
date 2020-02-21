@@ -13,4 +13,9 @@ interface StorageDriverInterface
      * @return string
      */
     public function store(File $file, string $destName): string;
+
+    /**
+     * @param string $fileName
+     */
+    public function remove(string $fileName): void;
 }

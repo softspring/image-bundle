@@ -106,6 +106,7 @@ abstract class ImageVersion implements ImageVersionInterface
     {
         $this->upload = $upload;
         $this->uploadedAt = gmdate('U');
+        $this->getImage()->markUploadedAtNow();
     }
 
     /**

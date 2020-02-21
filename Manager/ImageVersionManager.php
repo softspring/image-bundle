@@ -68,17 +68,34 @@ class ImageVersionManager implements ImageVersionManagerInterface
             return;
         }
 
-        // fill fields
-        $imageVersion->setFileMimeType($upload->getMimeType());
-        $imageVersion->setFileSize($upload->getSize());
-        [$width, $height] = getimagesize($upload->getRealPath());
-        $imageVersion->setWidth($width);
-        $imageVersion->setHeight($height);
-
         // call generator
         $generator = $this->imageTypes[$imageVersion->getImage()->getType()]['generator'];
         $name = $this->nameGenerators->getGenerator($generator)->generateName($imageVersion->getImage(), $imageVersion->getVersion(), $upload);
         // upload file
         $imageVersion->setUrl($this->storage->store($upload, $name));
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function removeFile(ImageVersionInterface $imageVersion): void
+    {
+        $this->storage->remove($imageVersion->getUrl());
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function fillFieldsFromUploadFile(ImageVersionInterface $imageVersion): void
+    {
+        if (! $upload = $imageVersion->getUpload()) {
+            return;
+        }
+
+        $imageVersion->setFileMimeType($upload->getMimeType());
+        $imageVersion->setFileSize($upload->getSize());
+        [$width, $height] = getimagesize($upload->getRealPath());
+        $imageVersion->setWidth($width);
+        $imageVersion->setHeight($height);
     }
 }
