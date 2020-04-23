@@ -96,6 +96,7 @@ class Configuration implements ConfigurationInterface
             ->arrayPrototype()
                 ->children()
                     ->append($this->getUploadRequirementsNode())
+                    ->enumNode('type')->values(['jpeg', 'png'])->defaultValue('jpeg')->end()
                     ->integerNode('scale_width')->end()
                     ->integerNode('scale_height')->end()
                 ->end()

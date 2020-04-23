@@ -148,7 +148,9 @@ class ImageManager implements ImageManagerInterface
             $scaleWidth = $scaleHeight * $originalVersion->getWidth() / $originalVersion->getHeight();
         }
 
-        $tmpPath = tempnam(sys_get_temp_dir(), 'sfs_image_') . '.jpeg';
+        $extension = $type = $config['type'];
+
+        $tmpPath = tempnam(sys_get_temp_dir(), 'sfs_image_') . '.' . $extension;
 
         $imagine = new Imagine();
         $gdImage = $imagine->open($originalVersion->getUpload()->getRealPath());
