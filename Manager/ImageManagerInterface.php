@@ -24,4 +24,19 @@ interface ImageManagerInterface extends CrudlEntityManagerInterface
      * @param ImageInterface $image
      */
     public function processVersionsImages(ImageInterface $image): void;
+
+    /**
+     * @return ImageInterface
+     */
+    public function createEntity();
+
+    /**
+     * @param ImageInterface $entity
+     */
+    public function saveEntity($entity): void;
+
+    /**
+     * @param ImageInterface $entity
+     */
+    public function deleteEntity($entity): void;
 }
