@@ -1,3 +1,11 @@
+parameters:
+    sfs_image.admin.images.list_view: '@@SfsImage/admin/image/list.html.twig'
+    sfs_image.admin.images.list_page_view: '@@SfsImage/admin/image/list-page.html.twig'
+    sfs_image.admin.images.create_view: '@@SfsImage/admin/image/create.html.twig'
+    sfs_image.admin.images.update_view: '@@SfsImage/admin/image/update.html.twig'
+    sfs_image.admin.images.delete_view: '@@SfsImage/admin/image/delete.html.twig'
+    sfs_image.admin.images.read_view: '@@SfsImage/admin/image/read.html.twig'
+
 services:
     _defaults:
         autowire: true
@@ -30,8 +38,8 @@ services:
                     is_granted: 'ROLE_ADMIN_IMAGE_LIST'
                     initialize_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_LIST_INITIALIZE
                     view_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_LIST_VIEW
-                    view: '@@SfsImage/admin/image/list.html.twig'
-                    view_page: '@@SfsImage/admin/image/list-page.html.twig'
+                    view: '%sfs_image.admin.images.list_view%'
+                    view_page: '%sfs_image.admin.images.list_page_view%'
                 create:
                     is_granted: 'ROLE_ADMIN_IMAGE_CREATE'
                     initialize_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_CREATE_INITIALIZE
@@ -40,7 +48,7 @@ services:
                     form_invalid_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_CREATE_FORM_INVALID
                     view_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_CREATE_VIEW
                     success_redirect_to: 'sfs_image_admin_images_list'
-                    view: '@@SfsImage/admin/image/create.html.twig'
+                    view: '%sfs_image.admin.images.create_view%'
                 update:
                     is_granted: 'ROLE_ADMIN_IMAGE_UPDATE'
                     param_converter_key: 'id'
@@ -50,7 +58,7 @@ services:
                     form_invalid_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_UPDATE_FORM_INVALID
                     view_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_UPDATE_VIEW
                     success_redirect_to: 'sfs_image_admin_images_list'
-                    view: '@@SfsImage/admin/image/update.html.twig'
+                    view: '%sfs_image.admin.images.update_view%'
                 delete:
                     is_granted: 'ROLE_ADMIN_IMAGE_DELETE'
                     param_converter_key: 'id'
@@ -60,10 +68,10 @@ services:
                     form_invalid_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_DELETE_FORM_INVALID
                     view_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_DELETE_VIEW
                     success_redirect_to: 'sfs_image_admin_images_list'
-                    view: '@@SfsImage/admin/image/delete.html.twig'
+                    view: '%sfs_image.admin.images.delete_view%'
                 read:
                     is_granted: 'ROLE_ADMIN_IMAGE_DETAILS'
                     param_converter_key: 'id'
                     initialize_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_READ_INITIALIZE
                     view_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_READ_VIEW
-                    view: '@@SfsImage/admin/image/read.html.twig'
+                    view: '%sfs_image.admin.images.read_view%'
