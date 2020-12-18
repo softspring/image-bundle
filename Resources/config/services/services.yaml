@@ -27,6 +27,9 @@ services:
     Softspring\ImageBundle\Storage\:
         resource: '../../../Storage/*'
 
+    Softspring\ImageBundle\Render\:
+        resource: '../../../Render/*'
+
     Softspring\ImageBundle\Twig\Extension\:
         resource: '../../../Twig/Extension/*'
         tags: ['twig.extension']
