@@ -94,7 +94,6 @@ class ImageManager implements ImageManagerInterface
         // persist versions
         foreach ($image->getVersions() as $version) {
             $version->setImage($image);
-            $this->em->persist($version);
         }
 
         // process original
@@ -115,7 +114,6 @@ class ImageManager implements ImageManagerInterface
 
             $imageVersion = $this->getAndScaleImageVersion($image, $key, $config, $originalVersion);
             $this->updateStorage($imageVersion);
-            $this->em->persist($imageVersion);
         }
     }
 
@@ -134,7 +132,7 @@ class ImageManager implements ImageManagerInterface
         $imageVersion = $image->getVersion($key);
         if (!$imageVersion) {
             $imageVersion = $this->imageVersionManager->createEntity();
-            $imageVersion->setImage($image);
+            $image->addVersion($imageVersion);
             $imageVersion->setVersion($key);
         }
 

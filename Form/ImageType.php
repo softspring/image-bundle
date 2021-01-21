@@ -2,10 +2,13 @@
 
 namespace Softspring\ImageBundle\Form;
 
+use Softspring\ImageBundle\Manager\ImageManagerInterface;
 use Softspring\ImageBundle\Manager\ImageTypeManagerInterface;
 use Softspring\ImageBundle\Model\ImageInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Event\SubmitEvent;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ImageType extends AbstractType
@@ -14,15 +17,22 @@ class ImageType extends AbstractType
      * @var ImageTypeManagerInterface
      */
     protected $imageTypeManager;
+    
+    /**
+     * @var ImageManagerInterface
+     */
+    protected $imageManager;
 
     /**
      * ImageType constructor.
      *
      * @param ImageTypeManagerInterface $imageTypeManager
+     * @param ImageManagerInterface     $imageManager
      */
-    public function __construct(ImageTypeManagerInterface $imageTypeManager)
+    public function __construct(ImageTypeManagerInterface $imageTypeManager, ImageManagerInterface $imageManager)
     {
         $this->imageTypeManager = $imageTypeManager;
+        $this->imageManager = $imageManager;
     }
 
     /**
@@ -31,7 +41,7 @@ class ImageType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => ImageInterface::class,
+            'data_class' => $this->imageManager->getEntityClass(),
             'image_type' => null,
         ]);
 
@@ -60,5 +70,18 @@ class ImageType extends AbstractType
                 'upload_requirements' => $config['upload_requirements'],
             ]);
         }
+
+        $builder->addEventListener(FormEvents::SUBMIT, function (SubmitEvent $event) use ($options) {
+            /** @var ImageInterface $image */
+            $image = $event->getData();
+            $form = $event->getForm();
+
+            if (!$image) {
+                return;
+            }
+
+            $image->setType($options['image_type']);
+            $image->markUploadedAtNow();
+        });
     }
 }
