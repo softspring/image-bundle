@@ -3,6 +3,7 @@
     "description": "An image management bundle",
     "type": "symfony-bundle",
     "license": "MIT",
+    "minimum-stability": "dev",
     "require": {
         "php": ">=7.4",
         "ext-gd": "*",
