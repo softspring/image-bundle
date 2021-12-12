@@ -16,22 +16,22 @@ services:
         class: Google\Cloud\Storage\StorageClient
 
     Softspring\ImageBundle\Form\:
-        resource: '../../../Form/*'
+        resource: '../../src/Form/*'
 
     Softspring\ImageBundle\Image\:
-        resource: '../../../Image/*'
+        resource: '../../src/Image/*'
 
     Softspring\ImageBundle\Manager\:
-        resource: '../../../Manager/*'
+        resource: '../../src/Manager/*'
 
     Softspring\ImageBundle\Storage\:
-        resource: '../../../Storage/*'
+        resource: '../../src/Storage/*'
 
     Softspring\ImageBundle\Render\:
-        resource: '../../../Render/*'
+        resource: '../../src/Render/*'
 
     Softspring\ImageBundle\Twig\Extension\:
-        resource: '../../../Twig/Extension/*'
+        resource: '../../src/Twig/Extension/*'
         tags: ['twig.extension']
 
     Softspring\ImageBundle\EntityListener\ImageVersionListener:

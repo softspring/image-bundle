@@ -16,10 +16,10 @@ services:
 #            $em: '@sfs_image.entity_manager'
 
     Softspring\ImageBundle\Form\Admin\:
-        resource: '../../../../Form/Admin/Image*'
+        resource: '../../../src/Form/Admin/Image*'
 
     Softspring\ImageBundle\EventListener\Admin\:
-        resource: '../../../../EventListener/Admin/Image*'
+        resource: '../../../src/EventListener/Admin/Image*'
 
     sfs_image.admin.image.controller:
         class: Softspring\CrudlBundle\Controller\CrudlController
