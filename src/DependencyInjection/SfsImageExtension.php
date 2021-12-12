@@ -21,7 +21,7 @@ class SfsImageExtension extends Extension implements PrependExtensionInterface
         $processor = new Processor();
         $configuration = new Configuration();
         $config = $processor->processConfiguration($configuration, $configs);
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config/services'));
+        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../../config/services'));
 
         // set config parameters
         $container->setParameter('sfs_image.entity_manager_name', $config['entity_manager']);

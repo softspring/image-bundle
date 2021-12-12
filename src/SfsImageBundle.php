@@ -11,6 +11,11 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class SfsImageBundle extends Bundle
 {
+    public function getPath(): string
+    {
+        return \dirname(__DIR__);
+    }
+
     /**
      * @param ContainerBuilder $container
      */
@@ -18,7 +23,7 @@ class SfsImageBundle extends Bundle
     {
         parent::build($container);
 
-        $basePath = realpath(__DIR__.'/Resources/config/doctrine-mapping/');
+        $basePath = realpath(__DIR__.'/../config/doctrine-mapping/');
 
         $this->addRegisterMappingsPass($container, [$basePath => 'Softspring\ImageBundle\Model']);
 
