@@ -11,14 +11,8 @@ interface ImageInterface
      */
     public function getId();
 
-    /**
-     * @return string|null
-     */
     public function getType(): ?string;
 
-    /**
-     * @param string|null $type
-     */
     public function setType(?string $type): void;
 
     /**
@@ -26,30 +20,13 @@ interface ImageInterface
      */
     public function getVersions();
 
-    /**
-     * @param ImageVersionInterface $version
-     */
     public function addVersion(ImageVersionInterface $version): void;
 
-    /**
-     * @param ImageVersionInterface $version
-     */
     public function removeVersion(ImageVersionInterface $version): void;
 
-    /**
-     * @param string $version
-     *
-     * @return ImageVersionInterface|null
-     */
     public function getVersion(string $version): ?ImageVersionInterface;
 
-    /**
-     * @return \DateTime|null
-     */
     public function getUploadedAt(): ?\DateTime;
 
-    /**
-     *
-     */
     public function markUploadedAtNow(): void;
 }

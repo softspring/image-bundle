@@ -11,8 +11,6 @@ class ImageTypeManager implements ImageTypeManagerInterface
 
     /**
      * ImageTypeManager constructor.
-     *
-     * @param array $imageTypes
      */
     public function __construct(array $imageTypes)
     {
@@ -20,7 +18,7 @@ class ImageTypeManager implements ImageTypeManagerInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function getTypes(): array
     {
@@ -28,7 +26,7 @@ class ImageTypeManager implements ImageTypeManagerInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function getType(string $type): array
     {

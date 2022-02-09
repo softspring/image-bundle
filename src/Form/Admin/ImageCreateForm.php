@@ -7,7 +7,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ImageCreateForm extends AbstractImageForm implements ImageCreateFormInterface
 {
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {

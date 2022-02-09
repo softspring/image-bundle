@@ -9,18 +9,18 @@ class DefaultNameGenerator implements NameGeneratorInterface
 {
     public function generateName(ImageInterface $image, string $version, File $file): string
     {
-        if ($version === '_original') {
+        if ('_original' === $version) {
             $versionName = '';
-        } elseif (substr($version, 0, 1) == '_') {
+        } elseif ('_' == substr($version, 0, 1)) {
             $versionName = substr($version, 1);
         } else {
             $versionName = $version;
         }
 
         if ($image->getId()) {
-            return $image->getId().'/'.sha1(time().microtime()) . ($versionName?".$versionName" :'') . '.'. $file->guessExtension();
+            return $image->getId().'/'.sha1(time().microtime()).($versionName ? ".$versionName" : '').'.'.$file->guessExtension();
         }
 
-        return sha1(time().$file->getRealPath()). ($versionName?".$versionName" :'') . '.'.$file->guessExtension();
+        return sha1(time().$file->getRealPath()).($versionName ? ".$versionName" : '').'.'.$file->guessExtension();
     }
 }

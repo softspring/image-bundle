@@ -35,11 +35,6 @@ class ImageVersionManager implements ImageVersionManagerInterface
 
     /**
      * ImageVersionManager constructor.
-     *
-     * @param EntityManagerInterface $em
-     * @param StorageDriverInterface $storage
-     * @param NameGenerators         $nameGenerators
-     * @param array                  $imageTypes
      */
     public function __construct(EntityManagerInterface $em, StorageDriverInterface $storage, NameGenerators $nameGenerators, array $imageTypes)
     {
@@ -50,7 +45,7 @@ class ImageVersionManager implements ImageVersionManagerInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function getTargetClass(): string
     {
@@ -58,7 +53,7 @@ class ImageVersionManager implements ImageVersionManagerInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function uploadFile(ImageVersionInterface $imageVersion): void
     {
@@ -76,7 +71,7 @@ class ImageVersionManager implements ImageVersionManagerInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function removeFile(ImageVersionInterface $imageVersion): void
     {
@@ -84,11 +79,11 @@ class ImageVersionManager implements ImageVersionManagerInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function fillFieldsFromUploadFile(ImageVersionInterface $imageVersion): void
     {
-        if (! $upload = $imageVersion->getUpload()) {
+        if (!$upload = $imageVersion->getUpload()) {
             return;
         }
 

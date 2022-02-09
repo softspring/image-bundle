@@ -60,7 +60,7 @@ abstract class ImageVersion implements ImageVersionInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function getImage(): ?ImageInterface
     {
@@ -68,7 +68,7 @@ abstract class ImageVersion implements ImageVersionInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function setImage(?ImageInterface $image): void
     {
@@ -76,7 +76,7 @@ abstract class ImageVersion implements ImageVersionInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function getVersion(): ?string
     {
@@ -84,7 +84,7 @@ abstract class ImageVersion implements ImageVersionInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function setVersion(?string $version): void
     {
@@ -92,7 +92,7 @@ abstract class ImageVersion implements ImageVersionInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function getUpload(): ?File
     {
@@ -100,7 +100,7 @@ abstract class ImageVersion implements ImageVersionInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function setUpload(?File $upload): void
     {
@@ -113,7 +113,7 @@ abstract class ImageVersion implements ImageVersionInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function getUrl(): ?string
     {
@@ -121,7 +121,7 @@ abstract class ImageVersion implements ImageVersionInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function setUrl(?string $url): void
     {
@@ -129,7 +129,7 @@ abstract class ImageVersion implements ImageVersionInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function getWidth(): ?int
     {
@@ -137,7 +137,7 @@ abstract class ImageVersion implements ImageVersionInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function setWidth(?int $width): void
     {
@@ -145,7 +145,7 @@ abstract class ImageVersion implements ImageVersionInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function getHeight(): ?int
     {
@@ -153,7 +153,7 @@ abstract class ImageVersion implements ImageVersionInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function setHeight(?int $height): void
     {
@@ -161,7 +161,7 @@ abstract class ImageVersion implements ImageVersionInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function getFileSize(): ?int
     {
@@ -169,7 +169,7 @@ abstract class ImageVersion implements ImageVersionInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function setFileSize(?int $fileSize): void
     {
@@ -177,7 +177,7 @@ abstract class ImageVersion implements ImageVersionInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function getFileMimeType(): ?string
     {
@@ -185,7 +185,7 @@ abstract class ImageVersion implements ImageVersionInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function setFileMimeType(?string $fileMimeType): void
     {
@@ -193,10 +193,10 @@ abstract class ImageVersion implements ImageVersionInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function getUploadedAt(): ?\DateTime
     {
-        return $this->uploadedAt ? \DateTime::createFromFormat("U", $this->uploadedAt) : null;
+        return $this->uploadedAt ? \DateTime::createFromFormat('U', $this->uploadedAt) : null;
     }
 }

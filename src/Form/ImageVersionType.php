@@ -3,7 +3,6 @@
 namespace Softspring\ImageBundle\Form;
 
 use Softspring\ImageBundle\Manager\ImageVersionManagerInterface;
-use Softspring\ImageBundle\Model\ImageInterface;
 use Softspring\ImageBundle\Model\ImageVersionInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Event\SubmitEvent;
@@ -22,8 +21,6 @@ class ImageVersionType extends AbstractType
 
     /**
      * ImageVersionType constructor.
-     *
-     * @param ImageVersionManagerInterface $imageVersionManager
      */
     public function __construct(ImageVersionManagerInterface $imageVersionManager)
     {
@@ -47,7 +44,7 @@ class ImageVersionType extends AbstractType
             'constraints' => new Image($options['upload_requirements']),
         ]);
 
-        $builder->addEventListener(FormEvents::SUBMIT, function (SubmitEvent $event) use ($options) {
+        $builder->addEventListener(FormEvents::SUBMIT, function (SubmitEvent $event) {
             /** @var ImageVersionInterface $imageVersion */
             $imageVersion = $event->getData();
             $form = $event->getForm();

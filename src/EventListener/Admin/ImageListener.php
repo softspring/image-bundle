@@ -24,9 +24,6 @@ class ImageListener implements EventSubscriberInterface
 
     /**
      * ImageListener constructor.
-     *
-     * @param ImageManagerInterface     $imageManager
-     * @param ImageTypeManagerInterface $imageTypesManager
      */
     public function __construct(ImageManagerInterface $imageManager, ImageTypeManagerInterface $imageTypesManager)
     {
@@ -35,7 +32,7 @@ class ImageListener implements EventSubscriberInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public static function getSubscribedEvents()
     {
@@ -45,17 +42,11 @@ class ImageListener implements EventSubscriberInterface
         ];
     }
 
-    /**
-     * @param ViewEvent $event
-     */
     public function onListViewAddTypes(ViewEvent $event): void
     {
         $event->getData()['imageTypes'] = $this->imageTypesManager->getTypes();
     }
 
-    /**
-     * @param GetResponseEntityEvent $event
-     */
     public function onCreateInitializeAddType(GetResponseEntityEvent $event): void
     {
         $type = $event->getRequest()->attributes->get('type');

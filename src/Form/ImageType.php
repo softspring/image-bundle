@@ -17,7 +17,7 @@ class ImageType extends AbstractType
      * @var ImageTypeManagerInterface
      */
     protected $imageTypeManager;
-    
+
     /**
      * @var ImageManagerInterface
      */
@@ -25,9 +25,6 @@ class ImageType extends AbstractType
 
     /**
      * ImageType constructor.
-     *
-     * @param ImageTypeManagerInterface $imageTypeManager
-     * @param ImageManagerInterface     $imageManager
      */
     public function __construct(ImageTypeManagerInterface $imageTypeManager, ImageManagerInterface $imageManager)
     {
@@ -36,7 +33,7 @@ class ImageType extends AbstractType
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
@@ -50,14 +47,14 @@ class ImageType extends AbstractType
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $typeDefinition = $this->imageTypeManager->getType($options['image_type']);
 
         $builder->add('_original', ImageVersionType::class, [
-            'property_path' => "versions[_original]",
+            'property_path' => 'versions[_original]',
             'upload_requirements' => $typeDefinition['upload_requirements'],
         ]);
 

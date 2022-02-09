@@ -31,7 +31,7 @@ abstract class Image implements ImageInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function getType(): ?string
     {
@@ -39,7 +39,7 @@ abstract class Image implements ImageInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function setType(?string $type): void
     {
@@ -47,15 +47,15 @@ abstract class Image implements ImageInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function getUploadedAt(): ?\DateTime
     {
-        return $this->uploadedAt ? \DateTime::createFromFormat("U", $this->uploadedAt) : null;
+        return $this->uploadedAt ? \DateTime::createFromFormat('U', $this->uploadedAt) : null;
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function markUploadedAtNow(): void
     {

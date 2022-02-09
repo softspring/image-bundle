@@ -67,9 +67,9 @@ class ImageRenderer
         foreach ($config['pictures'][$picture]['sources'] ?? [] as $source) {
             $sourceAttrs = $source['attrs'] ?? [];
             $sourceAttrs['srcset'] = implode(', ', array_map(function ($srcset) use ($image) {
-                return $this->getFinalUrl($image->getVersion($srcset['version'])) . ($srcset['suffix'] ? " {$srcset['suffix']}" : '');
+                return $this->getFinalUrl($image->getVersion($srcset['version'])).($srcset['suffix'] ? " {$srcset['suffix']}" : '');
             }, $source['srcset']));
-            $html .= '<source '. $this->htmlAttributes($sourceAttrs) . ' />';
+            $html .= '<source '.$this->htmlAttributes($sourceAttrs).' />';
         }
 
         $html .= $this->renderImgTag($image->getVersion($config['pictures'][$picture]['img']['src_version']), $attr);
@@ -78,19 +78,13 @@ class ImageRenderer
         return $html;
     }
 
-
     protected function htmlAttributes(array $attributes): string
     {
-        array_walk($attributes, function(&$value, $attribute) { $value = "$attribute=\"$value\""; });
+        array_walk($attributes, function (&$value, $attribute) { $value = "$attribute=\"$value\""; });
+
         return implode(' ', $attributes);
     }
 
-    /**
-     * @param ImageVersionInterface $version
-     * @param array                 $attr
-     *
-     * @return string
-     */
     protected function renderImgTag(ImageVersionInterface $version, array $attr = []): string
     {
         $attributes = array_merge([
@@ -100,17 +94,12 @@ class ImageRenderer
 
         $attributes['src'] = $this->getFinalUrl($version);
 
-        return '<img '. $this->htmlAttributes($attributes) . ' />';
+        return '<img '.$this->htmlAttributes($attributes).' />';
     }
 
-    /**
-     * @param ImageVersionInterface $version
-     *
-     * @return string
-     */
     protected function getFinalUrl(ImageVersionInterface $version): string
     {
-        if (substr($version->getUrl(), 0, 5) == 'gs://') {
+        if ('gs://' == substr($version->getUrl(), 0, 5)) {
             return 'https://storage.googleapis.com/'.substr($version->getUrl(), 5);
         }
 

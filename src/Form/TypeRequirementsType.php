@@ -19,7 +19,7 @@ class TypeRequirementsType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'label_format' => 'type_requirements_type.%name%.label'
+            'label_format' => 'type_requirements_type.%name%.label',
         ]);
     }
 
@@ -43,7 +43,7 @@ class TypeRequirementsType extends AbstractType
                 // 'webp' => 'image/webp',
                 // 'svg+xml' => 'image/svg+xml',
             ],
-            'constraints' => new Count(['min' => 1])
+            'constraints' => new Count(['min' => 1]),
         ]);
     }
 }

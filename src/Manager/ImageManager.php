@@ -31,10 +31,6 @@ class ImageManager implements ImageManagerInterface
 
     /**
      * ImageManager constructor.
-     *
-     * @param EntityManagerInterface       $em
-     * @param ImageTypeManagerInterface    $imageTypeManager
-     * @param ImageVersionManagerInterface $imageVersionManager
      */
     public function __construct(EntityManagerInterface $em, ImageTypeManagerInterface $imageTypeManager, ImageVersionManagerInterface $imageVersionManager)
     {
@@ -44,7 +40,7 @@ class ImageManager implements ImageManagerInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function getTargetClass(): string
     {
@@ -52,7 +48,7 @@ class ImageManager implements ImageManagerInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function createEntityForType(string $type): ImageInterface
     {
@@ -65,7 +61,7 @@ class ImageManager implements ImageManagerInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function fillEntityForType(ImageInterface $image, string $type): void
     {
@@ -87,7 +83,7 @@ class ImageManager implements ImageManagerInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function processVersionsImages(ImageInterface $image): void
     {
@@ -118,12 +114,6 @@ class ImageManager implements ImageManagerInterface
     }
 
     /**
-     * @param ImageInterface        $image
-     * @param string                $key
-     * @param array                 $config
-     * @param ImageVersionInterface $originalVersion
-     *
-     * @return ImageVersionInterface
      * @throws \Exception
      */
     protected function getAndScaleImageVersion(ImageInterface $image, string $key, array $config, ImageVersionInterface $originalVersion): ImageVersionInterface
@@ -138,17 +128,17 @@ class ImageManager implements ImageManagerInterface
 
         $scaleWidth = $config['scale_width'] ?? null;
         $scaleHeight = $config['scale_height'] ?? null;
-        if ($scaleWidth === null && $scaleHeight === null) {
+        if (null === $scaleWidth && null === $scaleHeight) {
             throw new \Exception('You should configure scale_width or scale_height');
-        } elseif ($scaleWidth !== null && $scaleHeight === null) {
+        } elseif (null !== $scaleWidth && null === $scaleHeight) {
             $scaleHeight = $scaleWidth * $originalVersion->getHeight() / $originalVersion->getWidth();
-        } elseif ($scaleWidth === null && $scaleHeight !== null) {
+        } elseif (null === $scaleWidth && null !== $scaleHeight) {
             $scaleWidth = $scaleHeight * $originalVersion->getWidth() / $originalVersion->getHeight();
         }
 
         $extension = $type = $config['type'];
 
-        $tmpPath = tempnam(sys_get_temp_dir(), 'sfs_image_') . '.' . $extension;
+        $tmpPath = tempnam(sys_get_temp_dir(), 'sfs_image_').'.'.$extension;
 
         $imagine = new Imagine();
         $gdImage = $imagine->open($originalVersion->getUpload()->getRealPath());

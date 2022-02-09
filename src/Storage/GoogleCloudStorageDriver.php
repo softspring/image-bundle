@@ -19,9 +19,6 @@ class GoogleCloudStorageDriver implements StorageDriverInterface
 
     /**
      * GoogleCloudStorageDriver constructor.
-     *
-     * @param StorageClient $storageClient
-     * @param string        $bucket
      */
     public function __construct(StorageClient $storageClient, string $bucket)
     {
@@ -30,7 +27,7 @@ class GoogleCloudStorageDriver implements StorageDriverInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function store(File $file, string $destName): string
     {
@@ -43,11 +40,11 @@ class GoogleCloudStorageDriver implements StorageDriverInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function remove(string $fileName): void
     {
-        if (substr($fileName, 0, 5) !== 'gs://') {
+        if ('gs://' !== substr($fileName, 0, 5)) {
             return;
         }
 

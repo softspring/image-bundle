@@ -19,11 +19,6 @@ class NameGenerators
         $this->generators = $generators;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return NameGeneratorInterface|null
-     */
     public function getGenerator(string $name): ?NameGeneratorInterface
     {
         return $this->generators[$name];

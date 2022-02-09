@@ -15,18 +15,12 @@ class ImageListener
 
     /**
      * ImageListener constructor.
-     *
-     * @param ImageManagerInterface $imageManager
      */
     public function __construct(ImageManagerInterface $imageManager)
     {
         $this->imageManager = $imageManager;
     }
 
-    /**
-     * @param ImageInterface    $image
-     * @param PreFlushEventArgs $eventArgs
-     */
     public function preFlush(ImageInterface $image, PreFlushEventArgs $eventArgs)
     {
         $this->imageManager->processVersionsImages($image);

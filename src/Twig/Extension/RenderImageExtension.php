@@ -2,8 +2,6 @@
 
 namespace Softspring\ImageBundle\Twig\Extension;
 
-use Softspring\ImageBundle\Model\ImageInterface;
-use Softspring\ImageBundle\Model\ImageVersionInterface;
 use Softspring\ImageBundle\Render\ImageRenderer;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
