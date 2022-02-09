@@ -28,6 +28,7 @@ services:
             - { method: setContainer, arguments: ['@service_container'] }
         arguments:
             $manager: '@Softspring\ImageBundle\Manager\ImageManagerInterface'
+            $eventDispatcher: '@event_dispatcher'
             $listFilterForm: '@Softspring\ImageBundle\Form\Admin\ImageListFilterFormInterface'
             $createForm: '@Softspring\ImageBundle\Form\Admin\ImageCreateFormInterface'
             $updateForm: '@Softspring\ImageBundle\Form\Admin\ImageUpdateFormInterface'
