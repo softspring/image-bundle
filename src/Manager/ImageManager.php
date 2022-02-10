@@ -14,10 +14,7 @@ class ImageManager implements ImageManagerInterface
 {
     use CrudlEntityManagerTrait;
 
-    /**
-     * @var EntityManagerInterface
-     */
-    protected $em;
+    protected EntityManagerInterface $em;
 
     /**
      * @var ImageTypeManagerInterface

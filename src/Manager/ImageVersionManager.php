@@ -13,10 +13,7 @@ class ImageVersionManager implements ImageVersionManagerInterface
 {
     use CrudlEntityManagerTrait;
 
-    /**
-     * @var EntityManagerInterface
-     */
-    protected $em;
+    protected EntityManagerInterface $em;
 
     /**
      * @var StorageDriverInterface
