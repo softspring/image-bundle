@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints\Count;
 
 class TypeRequirementsType extends AbstractType
 {
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'type_requirements';
     }

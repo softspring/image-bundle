@@ -12,29 +12,17 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class ImageListener implements EventSubscriberInterface
 {
-    /**
-     * @var ImageManagerInterface
-     */
-    protected $imageManager;
+    protected ImageManagerInterface $imageManager;
 
-    /**
-     * @var ImageTypeManagerInterface
-     */
-    protected $imageTypesManager;
+    protected ImageTypeManagerInterface $imageTypesManager;
 
-    /**
-     * ImageListener constructor.
-     */
     public function __construct(ImageManagerInterface $imageManager, ImageTypeManagerInterface $imageTypesManager)
     {
         $this->imageManager = $imageManager;
         $this->imageTypesManager = $imageTypesManager;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             SfsImageEvents::ADMIN_IMAGES_LIST_VIEW => 'onListViewAddTypes',
