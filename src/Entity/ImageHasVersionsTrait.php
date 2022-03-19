@@ -14,17 +14,11 @@ trait ImageHasVersionsTrait
      */
     protected $versions;
 
-    /**
-     * {@inheritDoc}
-     */
     public function getVersions()
     {
         return $this->versions;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function addVersion(ImageVersionInterface $version): void
     {
         if (empty($this->versions[$version->getVersion()])) {
@@ -34,9 +28,7 @@ trait ImageHasVersionsTrait
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    
     public function removeVersion(ImageVersionInterface $version): void
     {
         if (!empty($this->versions[$version->getVersion()])) {
@@ -45,9 +37,7 @@ trait ImageHasVersionsTrait
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    
     public function getVersion(string $version): ?ImageVersionInterface
     {
         return $this->versions->filter(function (ImageVersionInterface $imageVersion) use ($version) {

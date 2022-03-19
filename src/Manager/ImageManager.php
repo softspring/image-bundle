@@ -36,17 +36,11 @@ class ImageManager implements ImageManagerInterface
         $this->imageVersionManager = $imageVersionManager;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function getTargetClass(): string
     {
         return ImageInterface::class;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function createEntityForType(string $type): ImageInterface
     {
         /** @var ImageInterface $image */
@@ -57,9 +51,6 @@ class ImageManager implements ImageManagerInterface
         return $image;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function fillEntityForType(ImageInterface $image, string $type): void
     {
         $typeDefinition = $this->imageTypeManager->getType($type);
@@ -79,9 +70,6 @@ class ImageManager implements ImageManagerInterface
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function processVersionsImages(ImageInterface $image): void
     {
         // persist versions

@@ -30,33 +30,21 @@ abstract class Image implements ImageInterface
         $this->versions = new ArrayCollection();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function getType(): ?string
     {
         return $this->type;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function setType(?string $type): void
     {
         $this->type = $type;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function getUploadedAt(): ?\DateTime
     {
         return $this->uploadedAt ? \DateTime::createFromFormat('U', $this->uploadedAt) : null;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function markUploadedAtNow(): void
     {
         $this->uploadedAt = gmdate('U');

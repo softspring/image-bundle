@@ -6,9 +6,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ImageUpdateForm extends AbstractImageForm implements ImageUpdateFormInterface
 {
-    /**
-     * {@inheritDoc}
-     */
     public function configureOptions(OptionsResolver $resolver)
     {
         parent::configureOptions($resolver);

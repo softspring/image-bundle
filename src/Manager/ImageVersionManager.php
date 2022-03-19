@@ -41,17 +41,11 @@ class ImageVersionManager implements ImageVersionManagerInterface
         $this->imageTypes = $imageTypes;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function getTargetClass(): string
     {
         return ImageVersionInterface::class;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function uploadFile(ImageVersionInterface $imageVersion): void
     {
         $upload = $imageVersion->getUpload();
@@ -67,17 +61,11 @@ class ImageVersionManager implements ImageVersionManagerInterface
         $imageVersion->setUrl($this->storage->store($upload, $name));
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function removeFile(ImageVersionInterface $imageVersion): void
     {
         $this->storage->remove($imageVersion->getUrl());
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function fillFieldsFromUploadFile(ImageVersionInterface $imageVersion): void
     {
         if (!$upload = $imageVersion->getUpload()) {

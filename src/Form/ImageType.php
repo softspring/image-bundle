@@ -32,9 +32,6 @@ class ImageType extends AbstractType
         $this->imageManager = $imageManager;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
@@ -46,9 +43,6 @@ class ImageType extends AbstractType
         $resolver->setAllowedTypes('image_type', 'string');
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $typeDefinition = $this->imageTypeManager->getType($options['image_type']);
