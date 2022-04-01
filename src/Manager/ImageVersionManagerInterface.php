@@ -2,7 +2,7 @@
 
 namespace Softspring\ImageBundle\Manager;
 
-use Softspring\CrudlBundle\Manager\CrudlEntityManagerInterface;
+use Softspring\Component\CrudlController\Manager\CrudlEntityManagerInterface;
 use Softspring\ImageBundle\Model\ImageVersionInterface;
 
 interface ImageVersionManagerInterface extends CrudlEntityManagerInterface

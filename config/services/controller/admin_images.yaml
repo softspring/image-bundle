@@ -22,7 +22,7 @@ services:
         resource: '../../../src/EventListener/Admin/Image*'
 
     sfs_image.admin.image.controller:
-        class: Softspring\CrudlBundle\Controller\CrudlController
+        class: Softspring\Component\CrudlController\Controller\CrudlController
         public: true
         calls:
             - { method: setContainer, arguments: ['@service_container'] }

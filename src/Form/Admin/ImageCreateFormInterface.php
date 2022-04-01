@@ -2,7 +2,7 @@
 
 namespace Softspring\ImageBundle\Form\Admin;
 
-use Softspring\CrudlBundle\Form\EntityCreateFormInterface;
+use Softspring\Component\CrudlController\Form\EntityCreateFormInterface;
 
 interface ImageCreateFormInterface extends EntityCreateFormInterface
 {

@@ -5,7 +5,7 @@ namespace Softspring\ImageBundle\Manager;
 use Doctrine\ORM\EntityManagerInterface;
 use Imagine\Gd\Imagine;
 use Imagine\Image\Box;
-use Softspring\CrudlBundle\Manager\CrudlEntityManagerTrait;
+use Softspring\Component\CrudlController\Manager\CrudlEntityManagerTrait;
 use Softspring\ImageBundle\Model\ImageInterface;
 use Softspring\ImageBundle\Model\ImageVersionInterface;
 use Symfony\Component\HttpFoundation\File\File;

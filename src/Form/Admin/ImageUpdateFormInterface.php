@@ -2,7 +2,7 @@
 
 namespace Softspring\ImageBundle\Form\Admin;
 
-use Softspring\CrudlBundle\Form\EntityUpdateFormInterface;
+use Softspring\Component\CrudlController\Form\EntityUpdateFormInterface;
 
 interface ImageUpdateFormInterface extends EntityUpdateFormInterface
 {

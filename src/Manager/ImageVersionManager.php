@@ -3,7 +3,7 @@
 namespace Softspring\ImageBundle\Manager;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Softspring\CrudlBundle\Manager\CrudlEntityManagerTrait;
+use Softspring\Component\CrudlController\Manager\CrudlEntityManagerTrait;
 use Softspring\ImageBundle\Image\NameGenerators;
 use Softspring\ImageBundle\Model\ImageVersionInterface;
 use Softspring\ImageBundle\Storage\StorageDriverInterface;

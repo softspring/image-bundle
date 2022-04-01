@@ -14,7 +14,7 @@
         "friendsofphp/php-cs-fixer": "9999999-dev"
     },
     "suggest": {
-        "softspring/crudl-bundle": "Required if you want to enable admin controllers",
+        "softspring/crudl-controller": "Required if you want to enable admin controllers",
         "google/cloud-storage": "Required to integrate image storage in GCS"
     },
     "autoload": {

@@ -2,7 +2,7 @@
 
 namespace Softspring\ImageBundle\Form\Admin;
 
-use Softspring\CrudlBundle\Form\EntityListFilterForm;
+use Softspring\Component\CrudlController\Form\EntityListFilterForm;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
