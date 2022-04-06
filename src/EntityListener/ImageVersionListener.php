@@ -8,14 +8,8 @@ use Softspring\ImageBundle\Model\ImageVersionInterface;
 
 class ImageVersionListener
 {
-    /**
-     * @var ImageVersionManagerInterface
-     */
-    protected $manager;
+    protected ImageVersionManagerInterface $manager;
 
-    /**
-     * ImageVersionListener constructor.
-     */
     public function __construct(ImageVersionManagerInterface $manager)
     {
         $this->manager = $manager;

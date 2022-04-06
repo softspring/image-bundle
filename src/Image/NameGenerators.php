@@ -7,13 +7,8 @@ class NameGenerators
     /**
      * @var NameGeneratorInterface[]
      */
-    protected $generators;
+    protected array $generators;
 
-    /**
-     * NameGenerators constructor.
-     *
-     * @param NameGeneratorInterface[] $generators
-     */
     public function __construct(array $generators = [])
     {
         $this->generators = $generators;

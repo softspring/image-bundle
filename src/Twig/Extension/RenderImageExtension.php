@@ -8,10 +8,7 @@ use Twig\TwigFilter;
 
 class RenderImageExtension extends AbstractExtension
 {
-    /**
-     * @var ImageRenderer
-     */
-    protected $imageRenderer;
+    protected ImageRenderer $imageRenderer;
 
     public function __construct(ImageRenderer $imageRenderer)
     {

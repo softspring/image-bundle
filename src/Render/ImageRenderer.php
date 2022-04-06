@@ -7,10 +7,7 @@ use Softspring\ImageBundle\Model\ImageVersionInterface;
 
 class ImageRenderer
 {
-    /**
-     * @var array
-     */
-    protected $imageTypes;
+    protected array $imageTypes;
 
     public function __construct(array $imageTypes)
     {

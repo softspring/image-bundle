@@ -7,19 +7,10 @@ use Symfony\Component\HttpFoundation\File\File;
 
 class GoogleCloudStorageDriver implements StorageDriverInterface
 {
-    /**
-     * @var StorageClient
-     */
-    protected $storageClient;
+    protected StorageClient $storageClient;
 
-    /**
-     * @var string
-     */
-    protected $bucket;
+    protected string $bucket;
 
-    /**
-     * GoogleCloudStorageDriver constructor.
-     */
     public function __construct(StorageClient $storageClient, string $bucket)
     {
         $this->storageClient = $storageClient;

@@ -8,14 +8,8 @@ use Softspring\ImageBundle\Model\ImageInterface;
 
 class ImageListener
 {
-    /**
-     * @var ImageManagerInterface
-     */
-    protected $imageManager;
+    protected ImageManagerInterface $imageManager;
 
-    /**
-     * ImageListener constructor.
-     */
     public function __construct(ImageManagerInterface $imageManager)
     {
         $this->imageManager = $imageManager;
