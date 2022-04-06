@@ -29,19 +29,17 @@ services:
         arguments:
             $manager: '@Softspring\ImageBundle\Manager\ImageManagerInterface'
             $eventDispatcher: '@event_dispatcher'
-            $listFilterForm: '@Softspring\ImageBundle\Form\Admin\ImageListFilterFormInterface'
-            $createForm: '@Softspring\ImageBundle\Form\Admin\ImageCreateFormInterface'
-            $updateForm: '@Softspring\ImageBundle\Form\Admin\ImageUpdateFormInterface'
-            $deleteForm: '@Softspring\ImageBundle\Form\Admin\ImageDeleteFormInterface'
             $config:
                 entity_attribute: 'image'
                 list:
+                    filter_form: '@Softspring\ImageBundle\Form\Admin\ImageListFilterFormInterface'
                     is_granted: 'ROLE_SFS_IMAGE_ADMIN_IMAGES_LIST'
                     initialize_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_LIST_INITIALIZE
                     view_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_LIST_VIEW
                     view: '%sfs_image.admin.images.list_view%'
                     view_page: '%sfs_image.admin.images.list_page_view%'
                 create:
+                    form: '@Softspring\ImageBundle\Form\Admin\ImageCreateFormInterface'
                     is_granted: 'ROLE_SFS_IMAGE_ADMIN_IMAGES_CREATE'
                     initialize_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_CREATE_INITIALIZE
                     form_valid_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_CREATE_FORM_VALID
@@ -51,6 +49,7 @@ services:
                     success_redirect_to: 'sfs_image_admin_images_list'
                     view: '%sfs_image.admin.images.create_view%'
                 update:
+                    form: '@Softspring\ImageBundle\Form\Admin\ImageUpdateFormInterface'
                     is_granted: 'ROLE_SFS_IMAGE_ADMIN_IMAGES_UPDATE'
                     param_converter_key: 'id'
                     initialize_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_UPDATE_INITIALIZE
@@ -61,6 +60,7 @@ services:
                     success_redirect_to: 'sfs_image_admin_images_list'
                     view: '%sfs_image.admin.images.update_view%'
                 delete:
+                    form: '@Softspring\ImageBundle\Form\Admin\ImageDeleteFormInterface'
                     is_granted: 'ROLE_SFS_IMAGE_ADMIN_IMAGES_DELETE'
                     param_converter_key: 'id'
                     initialize_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_DELETE_INITIALIZE
