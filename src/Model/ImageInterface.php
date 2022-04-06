@@ -6,11 +6,6 @@ use Doctrine\Common\Collections\Collection;
 
 interface ImageInterface
 {
-    /**
-     * @return mixed
-     */
-    public function getId();
-
     public function getType(): ?string;
 
     public function setType(?string $type): void;
@@ -18,7 +13,7 @@ interface ImageInterface
     /**
      * @return Collection|ImageVersionInterface[]
      */
-    public function getVersions();
+    public function getVersions(): Collection;
 
     public function addVersion(ImageVersionInterface $version): void;
 

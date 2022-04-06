@@ -43,8 +43,8 @@ class SfsImageExtension extends Extension implements PrependExtensionInterface
         $doctrineConfig = [];
 
         // add a default config to force load target_entities, will be overwritten by ResolveDoctrineTargetEntityPass
-        $doctrineConfig['orm']['resolve_target_entities'][ImageInterface::class] = 'App\Entity\Image';
-        $doctrineConfig['orm']['resolve_target_entities'][ImageVersionInterface::class] = 'App\Entity\ImageVersion';
+        $doctrineConfig['orm']['resolve_target_entities'][ImageInterface::class] = 'Softspring\ImageBundle\Entity\Image';
+        $doctrineConfig['orm']['resolve_target_entities'][ImageVersionInterface::class] = 'Softspring\ImageBundle\Entity\ImageVersion';
 
         // disable auto-mapping for this bundle to prevent mapping errors
         $doctrineConfig['orm']['mappings']['SfsImageBundle'] = [

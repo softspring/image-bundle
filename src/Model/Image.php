@@ -7,24 +7,15 @@ use Doctrine\Common\Collections\Collection;
 
 abstract class Image implements ImageInterface
 {
-    /**
-     * @var string|null
-     */
-    protected $type;
+    protected ?string $type = null;
 
     /**
-     * @var ImageVersion[]|Collection
+     * @var ImageVersion[]|Collection|null
      */
-    protected $versions;
+    protected ?Collection $versions;
 
-    /**
-     * @var int|null
-     */
-    protected $uploadedAt;
+    protected ?int $uploadedAt = null;
 
-    /**
-     * Image constructor.
-     */
     public function __construct()
     {
         $this->versions = new ArrayCollection();
@@ -48,5 +39,34 @@ abstract class Image implements ImageInterface
     public function markUploadedAtNow(): void
     {
         $this->uploadedAt = gmdate('U');
+    }
+
+    public function getVersions(): Collection
+    {
+        return $this->versions;
+    }
+
+    public function addVersion(ImageVersionInterface $version): void
+    {
+        if (empty($this->versions[$version->getVersion()])) {
+            $this->versions[$version->getVersion()] = $version;
+            $version->setImage($this);
+            $this->markUploadedAtNow();
+        }
+    }
+
+    public function removeVersion(ImageVersionInterface $version): void
+    {
+        if (!empty($this->versions[$version->getVersion()])) {
+            unset($this->versions[$version->getVersion()]);
+            $this->markUploadedAtNow();
+        }
+    }
+
+    public function getVersion(string $version): ?ImageVersionInterface
+    {
+        return $this->versions->filter(function (ImageVersionInterface $imageVersion) use ($version) {
+            return $imageVersion->getVersion() == $version;
+        })->first() ?: null;
     }
 }

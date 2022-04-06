@@ -16,19 +16,10 @@ class ImageManager implements ImageManagerInterface
 
     protected EntityManagerInterface $em;
 
-    /**
-     * @var ImageTypeManagerInterface
-     */
-    protected $imageTypeManager;
+    protected ImageTypeManagerInterface $imageTypeManager;
 
-    /**
-     * @var ImageVersionManagerInterface
-     */
-    protected $imageVersionManager;
+    protected ImageVersionManagerInterface $imageVersionManager;
 
-    /**
-     * ImageManager constructor.
-     */
     public function __construct(EntityManagerInterface $em, ImageTypeManagerInterface $imageTypeManager, ImageVersionManagerInterface $imageVersionManager)
     {
         $this->em = $em;
@@ -57,13 +48,11 @@ class ImageManager implements ImageManagerInterface
 
         $image->setType($type);
 
-        /** @var ImageVersionInterface $version */
         $version = $this->imageVersionManager->createEntity();
         $version->setVersion('_original');
         $image->addVersion($version);
 
         foreach ($typeDefinition['versions'] as $key => $config) {
-            /** @var ImageVersionInterface $version */
             $version = $this->imageVersionManager->createEntity();
             $version->setVersion($key);
             $image->addVersion($version);

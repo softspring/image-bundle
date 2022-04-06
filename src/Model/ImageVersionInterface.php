@@ -8,7 +8,7 @@ interface ImageVersionInterface
 {
     public function getImage(): ?ImageInterface;
 
-    public function setImage(?ImageInterface $parent): void;
+    public function setImage(?ImageInterface $image): void;
 
     public function getVersion(): ?string;
 

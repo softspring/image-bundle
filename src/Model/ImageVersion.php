@@ -6,50 +6,23 @@ use Symfony\Component\HttpFoundation\File\File;
 
 abstract class ImageVersion implements ImageVersionInterface
 {
-    /**
-     * @var ImageInterface|null
-     */
-    protected $image;
+    protected ?ImageInterface $image = null;
 
-    /**
-     * @var string|null
-     */
-    protected $version;
+    protected ?string $version = null;
 
-    /**
-     * @var File|null
-     */
-    protected $upload;
+    protected ?File $upload = null;
 
-    /**
-     * @var string|null
-     */
-    protected $url;
+    protected ?string $url = null;
 
-    /**
-     * @var int|null
-     */
-    protected $width;
+    protected ?int $width = null;
 
-    /**
-     * @var int|null
-     */
-    protected $height;
+    protected ?int $height = null;
 
-    /**
-     * @var int|null
-     */
-    protected $fileSize;
+    protected ?int $fileSize = null;
 
-    /**
-     * @var string|null
-     */
-    protected $fileMimeType;
+    protected ?string $fileMimeType = null;
 
-    /**
-     * @var int|null
-     */
-    protected $uploadedAt;
+    protected ?int $uploadedAt = null;
 
     public function __construct(string $version = null, ImageInterface $image = null)
     {

@@ -36,13 +36,13 @@ services:
             $config:
                 entity_attribute: 'image'
                 list:
-                    is_granted: 'ROLE_ADMIN_IMAGE_LIST'
+                    is_granted: 'ROLE_SFS_IMAGE_ADMIN_IMAGES_LIST'
                     initialize_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_LIST_INITIALIZE
                     view_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_LIST_VIEW
                     view: '%sfs_image.admin.images.list_view%'
                     view_page: '%sfs_image.admin.images.list_page_view%'
                 create:
-                    is_granted: 'ROLE_ADMIN_IMAGE_CREATE'
+                    is_granted: 'ROLE_SFS_IMAGE_ADMIN_IMAGES_CREATE'
                     initialize_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_CREATE_INITIALIZE
                     form_valid_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_CREATE_FORM_VALID
                     success_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_CREATE_SUCCESS
@@ -51,7 +51,7 @@ services:
                     success_redirect_to: 'sfs_image_admin_images_list'
                     view: '%sfs_image.admin.images.create_view%'
                 update:
-                    is_granted: 'ROLE_ADMIN_IMAGE_UPDATE'
+                    is_granted: 'ROLE_SFS_IMAGE_ADMIN_IMAGES_UPDATE'
                     param_converter_key: 'id'
                     initialize_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_UPDATE_INITIALIZE
                     form_valid_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_UPDATE_FORM_VALID
@@ -61,7 +61,7 @@ services:
                     success_redirect_to: 'sfs_image_admin_images_list'
                     view: '%sfs_image.admin.images.update_view%'
                 delete:
-                    is_granted: 'ROLE_ADMIN_IMAGE_DELETE'
+                    is_granted: 'ROLE_SFS_IMAGE_ADMIN_IMAGES_DELETE'
                     param_converter_key: 'id'
                     initialize_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_DELETE_INITIALIZE
                     form_valid_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_DELETE_FORM_VALID
@@ -71,7 +71,7 @@ services:
                     success_redirect_to: 'sfs_image_admin_images_list'
                     view: '%sfs_image.admin.images.delete_view%'
                 read:
-                    is_granted: 'ROLE_ADMIN_IMAGE_DETAILS'
+                    is_granted: 'ROLE_SFS_IMAGE_ADMIN_IMAGES_DETAILS'
                     param_converter_key: 'id'
                     initialize_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_READ_INITIALIZE
                     view_event_name: !php/const Softspring\ImageBundle\SfsImageEvents::ADMIN_IMAGES_READ_VIEW

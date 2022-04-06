@@ -4,10 +4,7 @@ namespace Softspring\ImageBundle\Manager;
 
 class ImageTypeManager implements ImageTypeManagerInterface
 {
-    /**
-     * @var array
-     */
-    protected $imageTypes;
+    protected array $imageTypes;
 
     public function __construct(array $imageTypes)
     {

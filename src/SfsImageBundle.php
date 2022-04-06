@@ -22,7 +22,8 @@ class SfsImageBundle extends Bundle
 
         $basePath = realpath(__DIR__.'/../config/doctrine-mapping/');
 
-        $this->addRegisterMappingsPass($container, [$basePath => 'Softspring\ImageBundle\Model']);
+        $this->addRegisterMappingsPass($container, ["$basePath/model" => 'Softspring\ImageBundle\Model']);
+        $this->addRegisterMappingsPass($container, ["$basePath/entities" => 'Softspring\ImageBundle\Entity']);
 
         $container->addCompilerPass(new AliasDoctrineEntityManagerPass());
         $container->addCompilerPass(new NameGeneratorsPass());

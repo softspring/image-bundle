@@ -15,24 +15,12 @@ class ImageVersionManager implements ImageVersionManagerInterface
 
     protected EntityManagerInterface $em;
 
-    /**
-     * @var StorageDriverInterface
-     */
-    protected $storage;
+    protected StorageDriverInterface $storage;
 
-    /**
-     * @var NameGenerators
-     */
-    protected $nameGenerators;
+    protected NameGenerators $nameGenerators;
 
-    /**
-     * @var array
-     */
-    protected $imageTypes;
+    protected array $imageTypes;
 
-    /**
-     * ImageVersionManager constructor.
-     */
     public function __construct(EntityManagerInterface $em, StorageDriverInterface $storage, NameGenerators $nameGenerators, array $imageTypes)
     {
         $this->em = $em;

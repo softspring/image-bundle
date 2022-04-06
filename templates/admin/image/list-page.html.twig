@@ -3,11 +3,11 @@
 <div class="row">
 {% for image in entities %}
     <div class="col-3 border-gray">
-        {% if is_granted('ROLE_ADMIN_IMAGE_DETAILS', image) %}
+        {% if is_granted('ROLE_SFS_IMAGE_ADMIN_IMAGES_DETAILS', image) %}
             <a href="{{ url('sfs_image_admin_images_read', {'image':image.id}) }}" class="ml-2 text-nowrap">
         {% endif %}
             {{ image|sfs_image_render_image(['_original'], {'width':'100%','height':'100%', 'class':'img-thumbnail'}) }}
-        {% if is_granted('ROLE_ADMIN_IMAGE_DETAILS', image) %}
+        {% if is_granted('ROLE_SFS_IMAGE_ADMIN_IMAGES_DETAILS', image) %}
             </a>
         {% endif %}
     </div>
