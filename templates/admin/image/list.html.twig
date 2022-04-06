@@ -9,14 +9,14 @@
 
         {% if is_granted('ROLE_SFS_IMAGE_ADMIN_IMAGES_CREATE') and imageTypes|length %}
             <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownCreateImage" data-bs-toggle="dropdown" aria-expanded="false">
                     Create image
                 </button>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownCreateImage">
                     {% for key,type in imageTypes %}
-                        <a href="{{ url('sfs_image_admin_images_create', {'type':key}) }}" class="dropdown-item">{{ type.name }}</a>
+                        <li><a href="{{ url('sfs_image_admin_images_create', {'type':key}) }}" class="dropdown-item">{{ type.name }}</a></li>
                     {% endfor %}
-                </div>
+                </ul>
             </div>
         {% endif %}
     </div>
