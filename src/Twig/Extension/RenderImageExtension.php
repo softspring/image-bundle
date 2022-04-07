@@ -15,7 +15,7 @@ class RenderImageExtension extends AbstractExtension
         $this->imageRenderer = $imageRenderer;
     }
 
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
             new TwigFilter('sfs_image_render_image', [$this->imageRenderer, 'renderImage'], ['is_safe' => ['html']]),
