@@ -1,24 +1,30 @@
-{% trans_default_domain 'sfs_image' %}
+{% trans_default_domain 'sfs_image_admin' %}
 {% extends '@SfsImage/admin_layout.html.twig' %}
 {% block title %}{{ 'admin_images.list.meta.title'|trans }}{% endblock %}
 
+{% block breadcrums_content %}
+    {{ parent() }}
+    <li class="breadcrumb-item active" aria-current="content">{{ 'admin_images.list.breadcrumb'|trans }}</li>
+{% endblock breadcrums_content %}
+
 {% block content %}
-
     <div class="d-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3">Images</h1>
+        <h1 class="h3">{{ 'admin_images.list.title'|trans }}</h1>
 
-        {% if is_granted('ROLE_SFS_IMAGE_ADMIN_IMAGES_CREATE') and imageTypes|length %}
-            <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownCreateImage" data-bs-toggle="dropdown" aria-expanded="false">
-                    Create image
-                </button>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownCreateImage">
-                    {% for key,type in imageTypes %}
-                        <li><a href="{{ url('sfs_image_admin_images_create', {'type':key}) }}" class="dropdown-item">{{ type.name }}</a></li>
-                    {% endfor %}
-                </ul>
-            </div>
-        {% endif %}
+        <div class="float-end">
+            {% if is_granted('ROLE_SFS_IMAGE_ADMIN_IMAGES_CREATE') and image_types|length %}
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownCreateImage" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ 'admin_images.list.actions.create.link'|trans }}
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownCreateImage">
+                        {% for key,type in image_types %}
+                            <li><a href="{{ url('sfs_image_admin_images_create', {'type':key}) }}" class="dropdown-item">{{ type.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
     </div>
 
     {{ form_start(filterForm) }}
@@ -27,14 +33,4 @@
     {{ form_end(filterForm) }}
 
     {% include '@SfsImage/admin/image/list-page.html.twig' %}
-
-{#    {% if entities.pages|default(false) %}#}
-{#        {% if entities.prevPage %}#}
-{#            <a href="{{ url('sfs_image_admin_images_list', app.request.query.all|merge({ page: entities.prevPage })) }}" title="Prev page"><span class="mdi mdi-24px mdi-chevron-left"></span></a>#}
-{#        {% endif %}#}
-{#    #}
-{#        {% if entities.nextPage %}#}
-{#            <a class="float-right" href="{{ url('sfs_image_admin_images_list', app.request.query.all|merge({ page: entities.nextPage })) }}" title="Next page"><span class="mdi mdi-24px mdi-chevron-right"></span></a>#}
-{#        {% endif %}#}
-{#    {% endif %}#}
 {% endblock content %}

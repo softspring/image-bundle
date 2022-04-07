@@ -10,6 +10,14 @@ interface ImageInterface
 
     public function setType(?string $type): void;
 
+    public function getName(): ?string;
+
+    public function setName(?string $name): void;
+
+    public function getDescription(): ?string;
+
+    public function setDescription(?string $description): void;
+
     /**
      * @return Collection|ImageVersionInterface[]
      */

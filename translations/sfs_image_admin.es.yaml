@@ -1,0 +1,40 @@
+admin_images:
+    list:
+        meta.title: "Imágenes"
+        title: "Imágenes"
+        breadcrumb: "Imágenes"
+        actions:
+            create.link: "Nueva imagen"
+
+    create:
+        meta.title: "%type%"
+        title: "%type%"
+        breadcrumb: "Nueva imagen"
+        actions:
+            create.button: "Subir imagen"
+            cancel.button: "Cancelar"
+
+    read:
+        meta.title: "%name%"
+        title: "%name%"
+        breadcrumb: "Detalles"
+
+
+    form:
+        name.label: "Nombre de la imagen"
+        description.label: "Descripción"
+        _original.label: "Imágen principal"
+        upload.label: "Fichero"
+        upload_requirements:
+            title: "Requisitos"
+            minWidth: "ancho mínimo %value%"
+            maxWidth: "ancho máximo %value%"
+            minHeight: "alto mínimo %value%"
+            maxHeight: "alto máximo %value%"
+            mimeTypes: "formatos %value% permitidos"
+            allowSquare.true: "imagen cuadrada permitida"
+            allowSquare.false: "imagen cuadrada no permitida"
+            allowLandscape.true: "imagen horizontal permitida"
+            allowLandscape.false: "imagen horizontal no permitida"
+            allowPortrait.true: "imagen vertical permitida"
+            allowPortrait.false: "imagen vertical no permitida"

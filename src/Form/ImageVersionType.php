@@ -9,22 +9,23 @@ use Symfony\Component\Form\Event\SubmitEvent;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Image;
 
 class ImageVersionType extends AbstractType
 {
-    /**
-     * @var ImageVersionManagerInterface
-     */
-    protected $imageVersionManager;
+    protected ImageVersionManagerInterface $imageVersionManager;
 
-    /**
-     * ImageVersionType constructor.
-     */
     public function __construct(ImageVersionManagerInterface $imageVersionManager)
     {
         $this->imageVersionManager = $imageVersionManager;
+    }
+
+    public function getBlockPrefix(): string
+    {
+        return 'image_version';
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -40,7 +41,7 @@ class ImageVersionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('upload', FileType::class, [
-            'required' => false,
+            'required' => true,
             'constraints' => new Image($options['upload_requirements']),
         ]);
 
@@ -55,5 +56,10 @@ class ImageVersionType extends AbstractType
 
             $imageVersion->setVersion('_original');
         });
+    }
+
+    public function buildView(FormView $view, FormInterface $form, array $options)
+    {
+        $view->vars['upload_requirements'] = $options['upload_requirements'];
     }
 }

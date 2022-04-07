@@ -13,19 +13,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ImageType extends AbstractType
 {
-    /**
-     * @var ImageTypeManagerInterface
-     */
-    protected $imageTypeManager;
+    protected ImageTypeManagerInterface $imageTypeManager;
 
-    /**
-     * @var ImageManagerInterface
-     */
-    protected $imageManager;
+    protected ImageManagerInterface $imageManager;
 
-    /**
-     * ImageType constructor.
-     */
     public function __construct(ImageTypeManagerInterface $imageTypeManager, ImageManagerInterface $imageManager)
     {
         $this->imageTypeManager = $imageTypeManager;
@@ -46,6 +37,9 @@ class ImageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $typeDefinition = $this->imageTypeManager->getType($options['image_type']);
+
+        $builder->add('name');
+        $builder->add('description');
 
         $builder->add('_original', ImageVersionType::class, [
             'property_path' => 'versions[_original]',

@@ -27,12 +27,14 @@ class ImageListener implements EventSubscriberInterface
         return [
             SfsImageEvents::ADMIN_IMAGES_LIST_VIEW => 'onListViewAddTypes',
             SfsImageEvents::ADMIN_IMAGES_CREATE_INITIALIZE => 'onCreateInitializeAddType',
+            SfsImageEvents::ADMIN_IMAGES_CREATE_VIEW => 'onCreateViewAddTypeConfig',
+            SfsImageEvents::ADMIN_IMAGES_READ_VIEW => 'onReadViewAddTypeConfig',
         ];
     }
 
     public function onListViewAddTypes(ViewEvent $event): void
     {
-        $event->getData()['imageTypes'] = $this->imageTypesManager->getTypes();
+        $event->getData()['image_types'] = $this->imageTypesManager->getTypes();
     }
 
     public function onCreateInitializeAddType(GetResponseEntityEvent $event): void
@@ -42,5 +44,15 @@ class ImageListener implements EventSubscriberInterface
         /** @var ImageInterface $image */
         $image = $event->getEntity();
         $this->imageManager->fillEntityForType($image, $type);
+    }
+
+    public function onCreateViewAddTypeConfig(ViewEvent $event): void
+    {
+        $event->getData()['type_config'] = $this->imageTypesManager->getType($event->getRequest()->attributes->get('type'));
+    }
+
+    public function onReadViewAddTypeConfig(ViewEvent $event): void
+    {
+        $event->getData()['type_config'] = $this->imageTypesManager->getType($event->getData()['image']->getType());
     }
 }

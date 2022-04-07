@@ -13,7 +13,7 @@ class ImageListFilterForm extends EntityListFilterForm implements ImageListFilte
         parent::configureOptions($resolver);
 
         $resolver->setDefaults([
-            'translation_domain' => 'sfs_image',
+            'translation_domain' => 'sfs_image_admin',
             'label_format' => 'admin_images.list.filter_form.%name%.label',
         ]);
     }

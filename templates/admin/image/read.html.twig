@@ -1,14 +1,54 @@
-{% trans_default_domain 'sfs_image' %}
+{% trans_default_domain 'sfs_image_admin' %}
 {% extends '@SfsImage/admin_layout.html.twig' %}
-{% block title %}{{ 'admin_images.read.meta.title'|trans }}{% endblock %}
+{% block title %}{{ 'admin_images.read.meta.title'|trans({'%name%': image.name }) }}{% endblock %}
+
+{% block breadcrums_content %}
+    {{ parent() }}
+    <li class="breadcrumb-item"><a href="{{ url('sfs_image_admin_images_list') }}">{{ 'admin_images.list.breadcrumb'|trans }}</a></li>
+    <li class="breadcrumb-item active" aria-current="content">{{ 'admin_images.read.breadcrumb'|trans({'%name%': image.name }) }}</li>
+{% endblock breadcrums_content %}
 
 {% block content %}
-    <h1 class="h3 mb-4">{{ image.id }}</h1>
+    <h1 class="h3 mb-4">{{ 'admin_images.read.title'|trans({'%name%': image.name }) }}</h1>
 
-    <h2>Original</h2>
-    {{ image|sfs_image_render_image('_original', {'class':'img-thumbnail', 'alt': 'Original image', 'title': 'Original image'}) }}
+    {% if image.description %}
+        <p>{{ image.description|nl2br }}</p>
+    {% endif %}
 
-{#    <h2>Picture</h2>#}
-{#    {{ image|sfs_image_render_picture }}#}
-{#    <pre><code>{{ image|sfs_image_render_picture|e('html') }}</code></pre>#}
+    <div class="container bg-white p-4">
+        <div class="row">
+            <div class="col">
+                <h4>Original</h4>
+                <div>
+                    {{ image|sfs_image_render_image('_original', {'class':'img-thumbnail', 'alt': 'Original image', 'title': 'Original image'}) }}
+                </div>
+                {{ image.version('_original').width }}x{{ image.version('_original').height }}
+            </div>
+        </div>
+
+        {% for version in image.versions|filter((version) => version.version not in ['_original'])|sort((a, b) => (a.width+a.height) <=> (b.width+b.height))|reverse %}
+            <div class="row mt-5">
+                <div class="col">
+                    <h4>{{ version.version }}</h4>
+                    <div>
+                        {{ image|sfs_image_render_image(version.version, {'class':'img-'~version.version}) }}
+                    </div>
+                    {{ version.width }}x{{ version.height }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    {% if type_config.pictures|length %}
+        <div class="container p-4">
+            <div class="row">
+                <div class="col">
+                    <h6>HTML</h6>
+                    <pre><code>{{ image|sfs_image_render_picture|replace({'>':">\n"})|e('html') }}</code></pre>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+
 {% endblock content %}

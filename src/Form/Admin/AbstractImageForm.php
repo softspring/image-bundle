@@ -18,7 +18,8 @@ abstract class AbstractImageForm extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'translation_domain' => 'sfs_image',
+            'translation_domain' => 'sfs_image_admin',
+            'label_format' => 'admin_images.form.%name%.label',
         ]);
     }
 

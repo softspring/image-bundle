@@ -6,6 +6,11 @@
 
     <mapped-superclass name="Softspring\ImageBundle\Model\Image" table="image">
         <field name="type" column="type_key" type="string" length="50" nullable="false"/>
+
+        <field name="name" column="name" type="string" nullable="false"/>
+
+        <field name="description" column="description" type="string" nullable="true"/>
+
         <field name="uploadedAt" column="uploadedAt" type="integer" nullable="true">
             <options>
                 <option name="unsigned">true</option>

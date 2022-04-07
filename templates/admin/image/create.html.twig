@@ -1,17 +1,44 @@
-{% trans_default_domain 'sfs_image' %}
+{% trans_default_domain 'sfs_image_admin' %}
 {% extends '@SfsImage/admin_layout.html.twig' %}
-{% block title %}{{ 'admin_images.create.meta.title'|trans }}{% endblock %}
+{% block title %}{{ 'admin_images.create.meta.title'|trans({'%type%':type_config.name}) }}{% endblock %}
+
+{% form_theme form '@SfsImage/image_form_theme.html.twig' %}
+
+{% block breadcrums_content %}
+    {{ parent() }}
+    <li class="breadcrumb-item"><a href="{{ url('sfs_image_admin_images_list') }}">{{ 'admin_images.list.breadcrumb'|trans }}</a></li>
+    <li class="breadcrumb-item active" aria-current="content">{{ 'admin_images.create.breadcrumb'|trans({'%type%':type_config.name}) }}</li>
+{% endblock breadcrums_content %}
 
 {% block content %}
     <div class="d-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3">{{ 'admin_images.create.title'|trans }}</h1>
+        <h1 class="h3">{{ 'admin_images.create.title'|trans({'%type%':type_config.name}) }}</h1>
     </div>
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
+
+
+    <div class="container bg-white p-4">
+        {{ form_start(form) }}
+
+        <div class="row">
+            <div class="col">
+                {{ form_row(form.name) }}
+            </div>
+            <div class="col">
+                {{ form_row(form.description) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                {{ form_row(form._original) }}
+            </div>
+        </div>
+
         {{ form_rest(form) }}
+
         <div class="d-flex justify-content-end align-items-center">
             <a href="{{ url('sfs_image_admin_images_list') }}" class="btn btn-outline-secondary ml-3">{{ 'admin_images.create.actions.cancel.button'|trans }}</a>
-            <input type="submit" value="{{ 'admin_images.create.actions.create.button'|trans }}" class="btn btn-primary ml-3" />
+            <button class="btn btn-primary ms-3" type="submit">{{ 'admin_images.create.actions.create.button'|trans }}</button>
         </div>
-    {{ form_end(form) }}
+        {{ form_end(form) }}
+    </div>
 {% endblock content %}

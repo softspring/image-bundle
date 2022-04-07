@@ -9,6 +9,10 @@ abstract class Image implements ImageInterface
 {
     protected ?string $type = null;
 
+    protected ?string $name = null;
+
+    protected ?string $description = null;
+
     /**
      * @var ImageVersion[]|Collection|null
      */
@@ -29,6 +33,26 @@ abstract class Image implements ImageInterface
     public function setType(?string $type): void
     {
         $this->type = $type;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(?string $name): void
+    {
+        $this->name = $name;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): void
+    {
+        $this->description = $description;
     }
 
     public function getUploadedAt(): ?\DateTime

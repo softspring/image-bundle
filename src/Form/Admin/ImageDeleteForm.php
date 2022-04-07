@@ -12,7 +12,7 @@ class ImageDeleteForm extends AbstractType implements ImageDeleteFormInterface
     {
         $resolver->setDefaults([
             'data_class' => ImageInterface::class,
-            'translation_domain' => 'sfs_image',
+            'translation_domain' => 'sfs_image_admin',
             'label_format' => 'admin_images.delete.form.%name%.label',
         ]);
     }
