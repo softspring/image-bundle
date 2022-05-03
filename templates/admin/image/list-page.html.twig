@@ -1,16 +1,16 @@
 {% trans_default_domain 'sfs_image_admin' %}
 
-<div class="container">
+<div class="container-fluid">
     <div class="row">
     {% for image in entities %}
         <div class="col-3">
-            <div class="border-gray bg-white p-2 text-center">
+            <div class="card text-center">
                 {% if is_granted('ROLE_SFS_IMAGE_ADMIN_IMAGES_DETAILS', image) %}
                     <a href="{{ url('sfs_image_admin_images_read', {'image':image.id}) }}" class="ml-2 text-nowrap text-dark">
                 {% endif %}
-                    {{ image|sfs_image_render_image(['_thumbnail'], {'class':'img-thumbnail'}) }}
+                    {{ image|sfs_image_render_image(['_thumbnail'], {'class':'card-img-top img-thumbnail'}) }}
                 {% if is_granted('ROLE_SFS_IMAGE_ADMIN_IMAGES_DETAILS', image) %}
-                        <span class="d-block h6 mt-2">{{ image.name }}</span>
+                        <p class="card-title mb-0"><small><strong>{{ image.name }}</strong></small></p>
                         <span class="small">
                             {{ image_types[image.type].name }}
                             {{ image.version('_original').width }}x{{ image.version('_original').height }}
