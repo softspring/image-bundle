@@ -4,6 +4,7 @@ namespace Softspring\ImageBundle;
 
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 use Softspring\ImageBundle\DependencyInjection\Compiler\AliasDoctrineEntityManagerPass;
+use Softspring\ImageBundle\DependencyInjection\Compiler\ImageTypeProvidersPass;
 use Softspring\ImageBundle\DependencyInjection\Compiler\NameGeneratorsPass;
 use Softspring\ImageBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntityPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -27,6 +28,7 @@ class SfsImageBundle extends Bundle
 
         $container->addCompilerPass(new AliasDoctrineEntityManagerPass());
         $container->addCompilerPass(new NameGeneratorsPass());
+        $container->addCompilerPass(new ImageTypeProvidersPass());
         $container->addCompilerPass(new ResolveDoctrineTargetEntityPass());
     }
 

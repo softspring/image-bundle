@@ -7,6 +7,7 @@ use Softspring\Component\CrudlController\Manager\CrudlEntityManagerTrait;
 use Softspring\ImageBundle\Image\NameGenerators;
 use Softspring\ImageBundle\Model\ImageVersionInterface;
 use Softspring\ImageBundle\Storage\StorageDriverInterface;
+use Softspring\ImageBundle\Type\ImageTypesCollection;
 use Symfony\Component\HttpFoundation\File\File;
 
 class ImageVersionManager implements ImageVersionManagerInterface
@@ -19,14 +20,14 @@ class ImageVersionManager implements ImageVersionManagerInterface
 
     protected NameGenerators $nameGenerators;
 
-    protected array $imageTypes;
+    protected ImageTypesCollection $imageTypesCollection;
 
-    public function __construct(EntityManagerInterface $em, StorageDriverInterface $storage, NameGenerators $nameGenerators, array $imageTypes)
+    public function __construct(EntityManagerInterface $em, StorageDriverInterface $storage, NameGenerators $nameGenerators, ImageTypesCollection $imageTypesCollection)
     {
         $this->em = $em;
         $this->storage = $storage;
         $this->nameGenerators = $nameGenerators;
-        $this->imageTypes = $imageTypes;
+        $this->imageTypesCollection = $imageTypesCollection;
     }
 
     public function getTargetClass(): string
@@ -43,7 +44,7 @@ class ImageVersionManager implements ImageVersionManagerInterface
         }
 
         // call generator
-        $generator = $this->imageTypes[$imageVersion->getImage()->getType()]['generator'];
+        $generator = $this->imageTypesCollection->getType($imageVersion->getImage()->getType())['generator'];
         $name = $this->nameGenerators->getGenerator($generator)->generateName($imageVersion->getImage(), $imageVersion->getVersion(), $upload);
         // upload file
         $imageVersion->setUrl($this->storage->store($upload, $name));

@@ -7,10 +7,13 @@ services:
             $em: '@sfs_image.entity_manager'
             $storageClient: '@sfs_image.storage.google_cloud.storage_client'
             $bucket: '%sfs_image.storage.google_cloud.storage_bucket%'
-            $imageTypes: '%sfs_image.types%'
+            $imageTypesConfig: '%sfs_image.types%'
+
     _instanceof:
         Softspring\ImageBundle\Image\NameGeneratorInterface:
             tags: ['sfs_image.name_generator']
+        Softspring\ImageBundle\Type\ImageTypeProviderInterface:
+            tags: ['sfs_image.image_type_provider']
 
     sfs_image.storage.google_cloud.storage_client:
         class: Google\Cloud\Storage\StorageClient
@@ -26,6 +29,9 @@ services:
 
     Softspring\ImageBundle\Storage\:
         resource: '../../src/Storage/*'
+
+    Softspring\ImageBundle\Type\:
+        resource: '../../src/Type/*'
 
     Softspring\ImageBundle\Render\:
         resource: '../../src/Render/*'

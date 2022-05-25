@@ -4,14 +4,15 @@ namespace Softspring\ImageBundle\Render;
 
 use Softspring\ImageBundle\Model\ImageInterface;
 use Softspring\ImageBundle\Model\ImageVersionInterface;
+use Softspring\ImageBundle\Type\ImageTypesCollection;
 
 class ImageRenderer
 {
-    protected array $imageTypes;
+    protected ImageTypesCollection $imageTypesCollection;
 
-    public function __construct(array $imageTypes)
+    public function __construct(ImageTypesCollection $imageTypesCollection)
     {
-        $this->imageTypes = $imageTypes;
+        $this->imageTypesCollection = $imageTypesCollection;
     }
 
     public function imageUrl(ImageInterface $image, $version, array $attr = []): string
@@ -54,7 +55,7 @@ class ImageRenderer
 
     public function renderPicture(ImageInterface $image, string $picture = '_default', array $attr = []): string
     {
-        $config = $this->imageTypes[$image->getType()];
+        $config = $this->imageTypesCollection->getType($image->getType());
 
         if (!isset($config['pictures'][$picture])) {
             throw new \Exception('picture config is not set for '.$image->getType());
