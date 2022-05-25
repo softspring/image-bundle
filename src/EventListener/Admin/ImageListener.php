@@ -2,8 +2,8 @@
 
 namespace Softspring\ImageBundle\EventListener\Admin;
 
-use Softspring\CoreBundle\Event\ViewEvent;
 use Softspring\Component\CrudlController\Event\GetResponseEntityEvent;
+use Softspring\CoreBundle\Event\ViewEvent;
 use Softspring\ImageBundle\Manager\ImageManagerInterface;
 use Softspring\ImageBundle\Manager\ImageTypeManagerInterface;
 use Softspring\ImageBundle\Model\ImageInterface;
