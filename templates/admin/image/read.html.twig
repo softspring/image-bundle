@@ -8,6 +8,27 @@
     <li class="breadcrumb-item active" aria-current="content">{{ 'admin_images.read.breadcrumb'|trans({'%name%': image.name }) }}</li>
 {% endblock breadcrums_content %}
 
+
+{%- macro bytesToSize(bytes) -%}
+    {% set kilobyte = 1024 %}
+    {% set megabyte = kilobyte * 1024 %}
+    {% set gigabyte = megabyte * 1024 %}
+    {% set terabyte = gigabyte * 1024 %}
+
+    {% if bytes < kilobyte %}
+        {{ bytes ~ ' B' }}
+    {% elseif bytes < megabyte %}
+        {{ (bytes / kilobyte)|number_format(2, '.') ~ ' KiB' }}
+    {% elseif bytes < gigabyte %}
+        {{ (bytes / megabyte)|number_format(2, '.') ~ ' MiB' }}
+    {% elseif bytes < terabyte %}
+        {{ (bytes / gigabyte)|number_format(2, '.') ~ ' GiB' }}
+    {% else %}
+        {{ (bytes / terabyte)|number_format(2, '.') ~ ' TiB' }}
+    {% endif %}
+{%- endmacro -%}
+
+
 {% block content %}
     <h1 class="h3 mb-4">{{ 'admin_images.read.title'|trans({'%name%': image.name }) }}</h1>
 
@@ -23,6 +44,8 @@
                     {{ image|sfs_image_render_image('_original', {'class':'img-thumbnail', 'alt': 'Original image', 'title': 'Original image'}) }}
                 </div>
                 {{ image.version('_original').width }}x{{ image.version('_original').height }}
+                {{ image.version('_original').fileMimeType }}
+                {{ _self.bytesToSize(image.version('_original').fileSize) }}
             </div>
         </div>
 
@@ -34,6 +57,11 @@
                         {{ image|sfs_image_render_image(version.version, {'class':'img-'~version.version}) }}
                     </div>
                     {{ version.width }}x{{ version.height }}
+                    {{ version.fileMimeType }}
+                    {{ _self.bytesToSize(version.fileSize) }}
+                    {% for option,value in version.options %}
+                        {{ option }}: {{ value }}
+                    {% endfor %}
                 </div>
             </div>
         {% endfor %}

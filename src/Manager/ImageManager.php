@@ -117,8 +117,13 @@ class ImageManager implements ImageManagerInterface
         $imagine = new Imagine();
         $gdImage = $imagine->open($originalVersion->getUpload()->getRealPath());
         $gdImage->resize(new Box($scaleWidth, $scaleHeight));
-        $gdImage->save($tmpPath);
 
+        // https://imagine.readthedocs.io/en/stable/usage/introduction.html#save-images
+        $validOptions = array_flip(['png_compression_level', 'webp_quality', 'flatten', 'jpeg_quality', 'resolution-units', 'resolution-x', 'resolution-y', 'resampling-filter']);
+        $saveOptions = array_intersect_key($config, $validOptions);
+        $gdImage->save($tmpPath, $saveOptions);
+
+        $imageVersion->setOptions($saveOptions);
         $imageVersion->setUpload(new File($tmpPath));
 
         $this->imageVersionManager->fillFieldsFromUploadFile($imageVersion);

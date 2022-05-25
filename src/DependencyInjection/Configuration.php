@@ -2,6 +2,7 @@
 
 namespace Softspring\ImageBundle\DependencyInjection;
 
+use Imagine\Image\ImageInterface;
 use Softspring\ImageBundle\Image\DefaultNameGenerator;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\NodeDefinition;
@@ -94,11 +95,20 @@ class Configuration implements ConfigurationInterface
 
         $node
             ->arrayPrototype()
+                ->normalizeKeys(false)
                 ->children()
                     ->append($this->getUploadRequirementsNode())
                     ->enumNode('type')->values(['jpeg', 'png'])->defaultValue('jpeg')->end()
                     ->integerNode('scale_width')->end()
                     ->integerNode('scale_height')->end()
+                    ->integerNode('png_compression_level')->end()
+                    ->integerNode('webp_quality')->end()
+                    ->integerNode('jpeg_quality')->end()
+                    ->booleanNode('flatten')->end()
+                    ->integerNode('resolution-x')->end()
+                    ->integerNode('resolution-y')->end()
+                    ->scalarNode('resampling-filter')->defaultValue(ImageInterface::FILTER_LANCZOS)->end()
+                    ->scalarNode('resolution-units')->defaultValue(ImageInterface::RESOLUTION_PIXELSPERINCH)->end()
                 ->end()
             ->end()
         ;

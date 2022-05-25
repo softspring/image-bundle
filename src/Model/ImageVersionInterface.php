@@ -39,4 +39,8 @@ interface ImageVersionInterface
     public function setFileMimeType(?string $fileMimeType): void;
 
     public function getUploadedAt(): ?\DateTime;
+
+    public function getOptions(): ?array;
+
+    public function setOptions(?array $options): void;
 }
