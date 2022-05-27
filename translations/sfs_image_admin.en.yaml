@@ -1,0 +1,40 @@
+admin_images:
+    list:
+        meta.title: "Images"
+        title: "Images"
+        breadcrumb: "Images"
+        actions:
+            create.link: "New image"
+
+    create:
+        meta.title: "%type%"
+        title: "%type%"
+        breadcrumb: "New image"
+        actions:
+            create.button: "Upload image"
+            cancel.button: "Cancel"
+
+    read:
+        meta.title: "%name%"
+        title: "%name%"
+        breadcrumb: "Details"
+
+
+    form:
+        name.label: "Name"
+        description.label: "Description"
+        _original.label: "Main image"
+        upload.label: "File"
+        upload_requirements:
+            title: "Requirements"
+            minWidth: "min width %value%"
+            maxWidth: "max width %value%"
+            minHeight: "min height %value%"
+            maxHeight: "max height %value%"
+            mimeTypes: "allowed formats %value%"
+            allowSquare.true: "square image allowed"
+            allowSquare.false: "square image not allowed"
+            allowLandscape.true: "landscape image allowed"
+            allowLandscape.false: "landscape image not allowed"
+            allowPortrait.true: "portrait image allowed"
+            allowPortrait.false: "portrait image not allowed"

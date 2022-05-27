@@ -23,7 +23,7 @@ admin_images:
     form:
         name.label: "Nombre de la imagen"
         description.label: "Descripción"
-        _original.label: "Imágen principal"
+        _original.label: "Imagen principal"
         upload.label: "Fichero"
         upload_requirements:
             title: "Requisitos"
