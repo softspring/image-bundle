@@ -26,3 +26,41 @@
         </em>
     </p>
 {% endblock image_version_widget %}
+
+{% block image_modal_row %}
+    {{ form_label(form) }}
+    {{ form_widget(form) }}
+{% endblock %}
+
+{% block image_modal_widget %}
+    {% set modalOpenAttributes = 'data-search-url="'~form.vars.modal_search_url~'" data-bs-toggle="modal" data-bs-target="#imageTypeModal" data-image-type-field="'~form.vars.id~'" data-image-type-widget="'~form.vars.id~'_widget"' %}
+
+    <div id="{{ form.vars.id }}_widget" class="image-widget">
+        {% if show_thumbnail %}
+            <div data-image-type-thumbnail class="mb-2" {{ modalOpenAttributes|raw }} role="button">
+                {% if data %}
+                    {{ data|sfs_image_render_image(['_thumbnail'], {'class':'img-fluid'}) }}
+                {% else %}
+                    <img src="https://dummyimage.com/300x100/cfcfcf/205872.jpg&text=Select+image" class="img-fluid" />
+                {% endif %}
+            </div>
+        {% endif %}
+
+        <div class="input-group">
+            <div class="form-control" id="{{ form.vars.id }}_text" {{ modalOpenAttributes|raw }} role="button">{% if data %}{{ data.name }}{% endif %}</div>
+            <button type="button" class="btn btn-secondary" data-image-type-clean
+                    data-image-type-field="{{ form.vars.id }}"
+                    data-image-type-widget="{{ form.vars.id }}_widget"
+            >X</button>
+            <button type="button" class="btn btn-primary" {{ modalOpenAttributes|raw }}>Select</button>
+        </div>
+
+        {% if data %}
+            {% for version in data.versions %}
+                {% set attr = attr|merge({('data-image-version-'~version.version): data|sfs_image_render_image([version.version], {'class':'img-fluid'})}) %}
+            {% endfor %}
+        {% endif %}
+
+        {{ form_widget(form, {'attr':attr}) }}{# renders hidden field #}
+    </div>
+{% endblock %}

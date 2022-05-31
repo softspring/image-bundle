@@ -2,6 +2,16 @@ sfs_image_admin_images_list:
     controller: sfs_image.admin.image.controller::list
     path: /
 
+sfs_image_admin_images_search_type:
+    controller: sfs_image.admin.image.controller::list
+    path: /search-form-type/{valid_types}
+    defaults:
+        config:
+            filter_form: 'Softspring\ImageBundle\Form\ImageTypeSearchFilterForm'
+            view: '@SfsImage/admin/image/search_type.html.twig'
+            view_page: '@SfsImage/admin/image/search_type.html.twig'
+            filter_event_name: 'sfs_image.search_filter.filter_event'
+
 sfs_image_admin_images_create:
     controller: sfs_image.admin.image.controller::create
     path: /{type}/create

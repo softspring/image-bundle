@@ -1,0 +1,54 @@
+{% trans_default_domain 'sfs_image_admin' %}
+
+{% form_theme filterForm 'bootstrap_5_horizontal_layout.html.twig' %}
+
+{{ form_start(filterForm) }}
+<div class="container mb-4">
+    <div class="row">
+        <div class="col">{{ form_widget(filterForm.text) }}</div>
+        {% if filterForm.type is defined %}<div class="col">{{ form_widget(filterForm.type) }}</div>{% endif %}
+        <div class="col-2"><button type="submit" class="btn btn-primary">Search</button></div>
+
+        {% if filterForm.type is defined %}
+        <div class="col-2">
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle disabled" type="button" id="dropdownCreateImage" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{ 'admin_images.list.actions.create.link'|trans }}
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownCreateImage">
+                    {% for type in filterForm.vars.valid_types %}
+                        <li><a data-href="{{ url('sfs_image_admin_images_create', {'type':type}) }}" class="dropdown-item">Create {{ type }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% endif %}
+        {{ form_rest(filterForm) }}
+    </div>
+</div>
+{{ form_end(filterForm) }}
+
+<div class="container-fluid user-select-none">
+    <div class="row">
+        {% for image in entities %}
+            <div class="col-3">
+                <div class="card text-center">
+                    <div class="ml-2 text-nowrap text-dark" data-image-type  role="button"
+                         data-image-id="{{ image.id }}"
+                         data-image-name="{{ image.name }}"
+                        {% for version in image.versions %}
+                            data-image-version-{{ version.version }}="{{ image|sfs_image_render_image([version.version], {'class':'img-fluid'})|e }}"
+                        {% endfor %}
+                    >
+                        {{ image|sfs_image_render_image(['_thumbnail'], {'class':'card-img-top img-thumbnail'}) }}
+                        <p class="card-title mb-0"><small><strong>{{ image.name }}</strong></small></p>
+                        <span class="small">
+                            {{ image_types[image.type].name }}
+                            {{ image.version('_original').width }}x{{ image.version('_original').height }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>

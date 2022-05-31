@@ -21,6 +21,12 @@ services:
     Softspring\ImageBundle\Form\:
         resource: '../../src/Form/*'
 
+    Softspring\ImageBundle\Form\ImageTypeSearchFilterForm:
+        public: true
+
+    Softspring\ImageBundle\EventListener\:
+        resource: '../../src/EventListener/*'
+
     Softspring\ImageBundle\Image\:
         resource: '../../src/Image/*'
 
