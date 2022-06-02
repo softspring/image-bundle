@@ -42,4 +42,20 @@ class GoogleCloudStorageDriver implements StorageDriverInterface
             $object->delete();
         }
     }
+
+    public function download(string $fileName, string $destPath): void
+    {
+        if ('gs://' !== substr($fileName, 0, 5)) {
+            return;
+        }
+
+        [$bucket, $fileName] = explode('/', substr($fileName, 5), 2);
+
+        $bucket = $this->storageClient->bucket($bucket);
+        $object = $bucket->object($fileName);
+
+        if ($object->exists()) {
+            $object->downloadToFile($destPath);
+        }
+    }
 }

@@ -11,6 +11,8 @@ interface ImageVersionManagerInterface extends CrudlEntityManagerInterface
 
     public function removeFile(ImageVersionInterface $imageVersion): void;
 
+    public function downloadFile(ImageVersionInterface $imageVersion): string;
+
     public function fillFieldsFromUploadFile(ImageVersionInterface $imageVersion): void;
 
     /**

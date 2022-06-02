@@ -62,7 +62,10 @@ abstract class ImageVersion implements ImageVersionInterface
     public function setUpload(?File $upload): void
     {
         $this->upload = $upload;
-        $this->uploadedAt = gmdate('U');
+
+        if (!$this->uploadedAt) {
+            $this->uploadedAt = gmdate('U');
+        }
 
         if ($this->getImage()) {
             $this->getImage()->markUploadedAtNow();

@@ -18,6 +18,9 @@ services:
     sfs_image.storage.google_cloud.storage_client:
         class: Google\Cloud\Storage\StorageClient
 
+    Softspring\ImageBundle\Command\:
+        resource: '../../src/Command/*'
+
     Softspring\ImageBundle\Form\:
         resource: '../../src/Form/*'
 

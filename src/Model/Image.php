@@ -93,4 +93,53 @@ abstract class Image implements ImageInterface
             return $imageVersion->getVersion() == $version;
         })->first() ?: null;
     }
+
+    public function checkVersions(array $typeConfig): array
+    {
+        $checkResult = [
+            'new' => [],
+            'ok' => [],
+            'changed' => [],
+            'delete' => [],
+        ];
+
+        /** @var ImageVersionInterface $version */
+        foreach ($this->getVersions() as $version) {
+            if ('_original' === $version->getVersion()) {
+                $checkResult['ok'][] = '_original';
+                continue;
+            }
+
+            if (!isset($typeConfig['versions'][$version->getVersion()])) {
+                $checkResult['delete'][] = $version->getVersion();
+                continue;
+            }
+
+            $changedOptions = [];
+            foreach ($version->getOptions() as $option => $value) {
+                if (empty($typeConfig['versions'][$version->getVersion()][$option]) || $typeConfig['versions'][$version->getVersion()][$option] !== $value) {
+                    $changedOptions[$option] = [
+                        'config' => $typeConfig['versions'][$version->getVersion()][$option],
+                        'db' => $value,
+                        'string' => "$option: $value => {$typeConfig['versions'][$version->getVersion()][$option]}",
+                    ];
+                }
+            }
+            if (!empty($changedOptions)) {
+                $checkResult['changed'][$version->getVersion()] = $changedOptions;
+                continue;
+            }
+
+            $checkResult['ok'][] = $version->getVersion();
+        }
+
+        $dbVersions = $this->getVersions()->map(fn (ImageVersionInterface $version) => $version->getVersion())->toArray();
+        $configuredVersions = array_keys($typeConfig['versions']);
+        $newVersions = array_diff($configuredVersions, $dbVersions);
+        foreach ($newVersions as $version) {
+            $checkResult['new'][] = $version;
+        }
+
+        return $checkResult;
+    }
 }

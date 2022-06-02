@@ -15,7 +15,7 @@ class ImageRenderer
         $this->imageTypesCollection = $imageTypesCollection;
     }
 
-    public function imageUrl(ImageInterface $image, $version, array $attr = []): string
+    public function imageUrl(ImageInterface $image, $version, array $attr = []): ?string
     {
         if (is_array($version)) {
             foreach ($version as $singleVersion) {
@@ -83,8 +83,12 @@ class ImageRenderer
         return implode(' ', $attributes);
     }
 
-    protected function renderImgTag(ImageVersionInterface $version, array $attr = []): string
+    protected function renderImgTag(?ImageVersionInterface $version, array $attr = []): ?string
     {
+        if (!$version) {
+            return null;
+        }
+
         $attributes = array_merge([
             'width' => $version->getWidth(),
             'height' => $version->getHeight(),
@@ -95,8 +99,12 @@ class ImageRenderer
         return '<img '.$this->htmlAttributes($attributes).' />';
     }
 
-    protected function getFinalUrl(ImageVersionInterface $version): string
+    protected function getFinalUrl(?ImageVersionInterface $version): ?string
     {
+        if (!$version) {
+            return null;
+        }
+
         if ('gs://' == substr($version->getUrl(), 0, 5)) {
             return 'https://storage.googleapis.com/'.substr($version->getUrl(), 5);
         }

@@ -55,6 +55,14 @@ class ImageVersionManager implements ImageVersionManagerInterface
         $this->storage->remove($imageVersion->getUrl());
     }
 
+    public function downloadFile(ImageVersionInterface $imageVersion): string
+    {
+        $tempName = tempnam(sys_get_temp_dir(), 'sfs_image');
+        $this->storage->download($imageVersion->getUrl(), $tempName);
+
+        return $tempName;
+    }
+
     public function fillFieldsFromUploadFile(ImageVersionInterface $imageVersion): void
     {
         if (!$upload = $imageVersion->getUpload()) {

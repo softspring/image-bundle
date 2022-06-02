@@ -29,6 +29,8 @@ interface ImageInterface
 
     public function getVersion(string $version): ?ImageVersionInterface;
 
+    public function checkVersions(array $typeConfig): array;
+
     public function getUploadedAt(): ?\DateTime;
 
     public function markUploadedAtNow(): void;

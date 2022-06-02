@@ -36,6 +36,23 @@
         <p>{{ image.description|nl2br }}</p>
     {% endif %}
 
+    {% set checkVersions = image.checkVersions(type_config) %}
+    {% for version in checkVersions.new %}
+        <div class="alert alert-warning" role="alert">
+            Missing <strong>{{ version }}</strong> in this image, seems to be a <strong>new version</strong> in config. You need to run image migrations command.
+        </div>
+    {% endfor %}
+    {% for version in checkVersions.delete %}
+        <div class="alert alert-warning" role="alert">
+            Image <strong>{{ version }}</strong> version has been <strong>deleted</strong> in config. You need to run image migrations command to cleanup images.
+        </div>
+    {% endfor %}
+    {% for version,changedOptions in checkVersions.changed %}
+        <div class="alert alert-warning" role="alert">
+            Image <strong>{{ version }}</strong> version has been <strong>changed</strong> in config ({{ changedOptions|map((changedOption) => changedOption.string)|join(', ') }}). You need to run image migrations command to cleanup images.
+        </div>
+    {% endfor %}
+
     <div class="container-fluid bg-white p-4">
         <div class="row">
             <div class="col">

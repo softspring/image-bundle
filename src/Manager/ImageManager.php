@@ -87,6 +87,30 @@ class ImageManager implements ImageManagerInterface
         }
     }
 
+    public function generateVersion(ImageInterface $image, string $version): void
+    {
+        $versionConfig = $this->imageTypeManager->getTypes()[$image->getType()]['versions'][$version];
+
+        $originalVersion = $image->getVersion('_original');
+
+        $originalVersion->setUpload(new File($this->imageVersionManager->downloadFile($originalVersion)));
+
+        $imageVersion = $this->getAndScaleImageVersion($image, $version, $versionConfig, $image->getVersion('_original'));
+        $this->updateStorage($imageVersion);
+
+        $originalVersion->setUpload(null);
+
+        $this->imageVersionManager->saveEntity($imageVersion);
+    }
+
+    public function deleteVersion(ImageVersionInterface $version): void
+    {
+        $image = $version->getImage();
+        $image->removeVersion($version);
+        $this->imageVersionManager->deleteEntity($version);
+        $this->saveEntity($image);
+    }
+
     /**
      * @throws \Exception
      */
@@ -123,7 +147,11 @@ class ImageManager implements ImageManagerInterface
         $saveOptions = array_intersect_key($config, $validOptions);
         $gdImage->save($tmpPath, $saveOptions);
 
-        $imageVersion->setOptions($saveOptions);
+        // save options in database
+        $databaseOptions = $config;
+        unset($databaseOptions['upload_requirements']);
+        $imageVersion->setOptions($databaseOptions);
+
         $imageVersion->setUpload(new File($tmpPath));
 
         $this->imageVersionManager->fillFieldsFromUploadFile($imageVersion);
