@@ -48,7 +48,7 @@ class ImageTypeSearchFilterForm extends EntityListFilterForm implements FormOpti
 
         if (count($filteredTypes) > 1) {
             $builder->add('type', ChoiceType::class, [
-                'choices' => array_flip(array_map(fn($v) => $v['name'], $filteredTypes)),
+                'choices' => array_flip(array_map(fn ($v) => $v['name'], $filteredTypes)),
                 'multiple' => true,
                 'property_path' => '[type_in]',
             ]);

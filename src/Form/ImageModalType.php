@@ -49,17 +49,17 @@ class ImageModalType extends AbstractType
     {
         $builder->addModelTransformer(new CallbackTransformer(function ($value) {
             return $value;
-        }, function ($value) {
-            return is_string($value) ? $this->em->getRepository(ImageInterface::class)->findOneById($value) : $value;
-        }));
+            }, function ($value) {
+                return is_string($value) ? $this->em->getRepository(ImageInterface::class)->findOneById($value) : $value;
+            }));
     }
 
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         $view->vars['show_thumbnail'] = $options['show_thumbnail'];
         $view->vars['image_attr'] = $options['image_attr'];
-        $view->vars['attr']["data-image-type-config"] = json_encode($options['image_types']);
-        $view->vars['attr']["data-image-type-types"] = implode(',', array_keys($options['image_types']));
+        $view->vars['attr']['data-image-type-config'] = json_encode($options['image_types']);
+        $view->vars['attr']['data-image-type-types'] = implode(',', array_keys($options['image_types']));
         $view->vars['modal_search_url'] = $this->router->generate('sfs_image_admin_images_search_type', [
             'valid_types' => implode(',', array_keys($options['image_types'])),
         ]);
