@@ -43,28 +43,28 @@ class TypesMigrationCommand extends Command
 
             $checkVersions = $image->checkVersions($typeConfig);
 
-            foreach ($checkVersions['ok'] as $versionId) {
-                $output->writeln(sprintf(' - version "%s" is ok ', $versionId));
+            foreach ($checkVersions['ok'] as $versionId) if ($versionId !== '_original') {
+                $output->writeln(sprintf(' - version "%s" is <fg=green>OK</>', $versionId));
             }
 
             foreach ($checkVersions['new'] as $versionId) {
-                $output->write(sprintf(' - version "%s" is new in config, needs to be created in database ', $versionId));
+                $output->write(sprintf(' - version "%s" is new in config, needs to be created: ', $versionId));
                 try {
                     $this->imageManager->generateVersion($image, $versionId);
-                    $output->writeln('<fg=green>OK</>');
+                    $output->writeln('<fg=green>CREATED</>');
                 } catch (\Exception $e) {
-                    $output->writeln('<error>Error</error>');
+                    $output->writeln('<error>ERROR</error>');
                 }
             }
 
             foreach ($checkVersions['changed'] as $versionId => $changes) {
                 $changedOptionsString = implode(', ', array_map(fn ($v) => $v['string'], $changes));
-                $output->write(sprintf(' - version "%s" needs to be recreated (%s) ', $versionId, $changedOptionsString));
+                $output->write(sprintf(' - version "%s" needs to be recreated (%s): ', $versionId, $changedOptionsString));
                 try {
                     $this->imageManager->generateVersion($image, $versionId);
-                    $output->writeln('<fg=green>OK</>');
+                    $output->writeln('<fg=green>RECREATED</>');
                 } catch (\Exception $e) {
-                    $output->writeln('<error>Error</error>');
+                    $output->writeln('<error>ERROR</error>');
                 }
             }
 
@@ -72,9 +72,9 @@ class TypesMigrationCommand extends Command
                 $output->write(sprintf(' - version "%s" to be deleted from database (has been deleted from config) ', $versionId));
                 try {
                     $this->imageManager->deleteVersion($image->getVersion($versionId));
-                    $output->writeln('<fg=green>OK</>');
+                    $output->writeln('<fg=green>DELETED</>');
                 } catch (\Exception $e) {
-                    $output->writeln('<error>Error</error>');
+                    $output->writeln('<error>ERROR</error>');
                 }
             }
 
