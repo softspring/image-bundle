@@ -10,7 +10,7 @@ class SfsImageEvents
     public const ADMIN_TYPES_LIST_INITIALIZE = 'sfs_image.admin.types.list_initialize';
 
     /**
-     * @Event("Softspring\CoreBundle\Event\ViewEvent")
+     * @Event("Softspring\Component\Events\ViewEvent")
      */
     public const ADMIN_TYPES_LIST_VIEW = 'sfs_image.admin.types.list_view';
 
@@ -35,7 +35,7 @@ class SfsImageEvents
     public const ADMIN_TYPES_CREATE_FORM_INVALID = 'sfs_image.admin.types.create_form_invalid';
 
     /**
-     * @Event("Softspring\CoreBundle\Event\ViewEvent")
+     * @Event("Softspring\Component\Events\ViewEvent")
      */
     public const ADMIN_TYPES_CREATE_VIEW = 'sfs_image.admin.types.create_view';
 
@@ -60,7 +60,7 @@ class SfsImageEvents
     public const ADMIN_TYPES_UPDATE_FORM_INVALID = 'sfs_image.admin.types.update_form_invalid';
 
     /**
-     * @Event("Softspring\CoreBundle\Event\ViewEvent")
+     * @Event("Softspring\Component\Events\ViewEvent")
      */
     public const ADMIN_TYPES_UPDATE_VIEW = 'sfs_image.admin.types.update_view';
 
@@ -85,7 +85,7 @@ class SfsImageEvents
     public const ADMIN_TYPES_DELETE_FORM_INVALID = 'sfs_image.admin.types.delete_form_invalid';
 
     /**
-     * @Event("Softspring\CoreBundle\Event\ViewEvent")
+     * @Event("Softspring\Component\Events\ViewEvent")
      */
     public const ADMIN_TYPES_DELETE_VIEW = 'sfs_image.admin.types.delete_view';
 
@@ -95,7 +95,7 @@ class SfsImageEvents
     public const ADMIN_TYPES_READ_INITIALIZE = 'sfs_image.admin.types.read_initialize';
 
     /**
-     * @Event("Softspring\CoreBundle\Event\ViewEvent")
+     * @Event("Softspring\Component\Events\ViewEvent")
      */
     public const ADMIN_TYPES_READ_VIEW = 'sfs_image.admin.types.read_view';
 
@@ -105,7 +105,7 @@ class SfsImageEvents
     public const ADMIN_IMAGES_LIST_INITIALIZE = 'sfs_image.admin.images.list_initialize';
 
     /**
-     * @Event("Softspring\CoreBundle\Event\ViewEvent")
+     * @Event("Softspring\Component\Events\ViewEvent")
      */
     public const ADMIN_IMAGES_LIST_VIEW = 'sfs_image.admin.images.list_view';
 
@@ -130,7 +130,7 @@ class SfsImageEvents
     public const ADMIN_IMAGES_CREATE_FORM_INVALID = 'sfs_image.admin.images.create_form_invalid';
 
     /**
-     * @Event("Softspring\CoreBundle\Event\ViewEvent")
+     * @Event("Softspring\Component\Events\ViewEvent")
      */
     public const ADMIN_IMAGES_CREATE_VIEW = 'sfs_image.admin.images.create_view';
 
@@ -155,7 +155,7 @@ class SfsImageEvents
     public const ADMIN_IMAGES_UPDATE_FORM_INVALID = 'sfs_image.admin.images.update_form_invalid';
 
     /**
-     * @Event("Softspring\CoreBundle\Event\ViewEvent")
+     * @Event("Softspring\Component\Events\ViewEvent")
      */
     public const ADMIN_IMAGES_UPDATE_VIEW = 'sfs_image.admin.images.update_view';
 
@@ -180,7 +180,7 @@ class SfsImageEvents
     public const ADMIN_IMAGES_DELETE_FORM_INVALID = 'sfs_image.admin.images.delete_form_invalid';
 
     /**
-     * @Event("Softspring\CoreBundle\Event\ViewEvent")
+     * @Event("Softspring\Component\Events\ViewEvent")
      */
     public const ADMIN_IMAGES_DELETE_VIEW = 'sfs_image.admin.images.delete_view';
 
@@ -190,7 +190,7 @@ class SfsImageEvents
     public const ADMIN_IMAGES_READ_INITIALIZE = 'sfs_image.admin.images.read_initialize';
 
     /**
-     * @Event("Softspring\CoreBundle\Event\ViewEvent")
+     * @Event("Softspring\Component\Events\ViewEvent")
      */
     public const ADMIN_IMAGES_READ_VIEW = 'sfs_image.admin.images.read_view';
 }
