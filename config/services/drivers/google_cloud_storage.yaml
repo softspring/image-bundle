@@ -1,0 +1,14 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+        bind:
+            $storageClient: '@sfs_image.storage.google_cloud.storage_client'
+            $bucket: '%sfs_image.storage.google_cloud_storage.bucket%'
+
+    sfs_image.storage.google_cloud.storage_client:
+        class: Google\Cloud\Storage\StorageClient
+
+    Softspring\ImageBundle\Storage\StorageDriverInterface:
+        class: Softspring\ImageBundle\Storage\GoogleCloudStorageDriver

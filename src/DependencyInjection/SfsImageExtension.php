@@ -36,6 +36,11 @@ class SfsImageExtension extends Extension implements PrependExtensionInterface
         if ($config['image']['admin_controller']) {
             $loader->load('controller/admin_images.yaml');
         }
+
+        if ($config['driver'] === 'google_cloud_storage') {
+            $container->setParameter('sfs_image.storage.google_cloud_storage.bucket', $config['google_cloud_storage']['bucket']);
+            $loader->load('drivers/google_cloud_storage.yaml');
+        }
     }
 
     public function prepend(ContainerBuilder $container)
